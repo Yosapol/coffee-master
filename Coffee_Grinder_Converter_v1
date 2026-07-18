@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffee Grinder Converter</title>
+<style>
+:root{
+  --ink:#211a16;
+  --muted:#6e625b;
+  --line:#ddd4cc;
+  --panel:#fffaf6;
+  --accent:#18635a;
+  --accent-soft:#e5f3ef;
+  --warn:#9a5b05;
+  --warn-soft:#fff3d7;
+  --bg:#f7f1eb;
+}
+*{box-sizing:border-box}
+body{
+  font-family:Arial,sans-serif;
+  max-width:960px;
+  margin:0 auto;
+  padding:clamp(14px,3vw,28px) clamp(12px,3vw,18px) 42px;
+  color:var(--ink);
+  background:var(--bg);
+}
+h1{font-size:clamp(24px,6vw,28px);margin:0 0 8px}
+h2{font-size:18px;margin:0 0 12px}
+p{color:var(--muted);line-height:1.45;margin:0 0 18px}
+.app{
+  display:grid;
+  gap:16px;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:clamp(14px,3vw,18px);
+  overflow:hidden;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(130px,1fr));
+  gap:12px;
+  align-items:end;
+}
+.converter-grid{
+  grid-template-columns:minmax(180px,1.25fr) minmax(120px,.75fr) minmax(180px,1.25fr) minmax(150px,1fr);
+  align-items:stretch;
+}
+.converter-box{
+  min-height:112px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+}
+.converter-box label,
+.converter-label{
+  min-height:16px;
+}
+.converter-box select,
+.converter-box input{
+  margin-top:0;
+}
+.converter-box .hint{
+  margin-top:6px;
+}
+.live-result{
+  background:#eef7f4;
+  border-color:#bedbd4;
+}
+.live-result strong{
+  display:block;
+  color:var(--accent);
+  font-size:22px;
+  line-height:40px;
+  min-height:40px;
+  margin-top:0;
+}
+label{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin:0 0 5px;
+}
+select,input,button{
+  width:100%;
+  min-height:40px;
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:white;
+  color:var(--ink);
+  font-size:15px;
+}
+button{
+  border-color:var(--accent);
+  background:var(--accent);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{filter:brightness(.96)}
+button.secondary{
+  width:auto;
+  min-height:36px;
+  background:white;
+  color:var(--accent);
+  margin-top:8px;
+}
+.result{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:14px;
+  align-items:stretch;
+}
+.metric{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:16px;
+}
+.big{
+  display:block;
+  font-size:clamp(28px,8vw,34px);
+  font-weight:800;
+  margin:4px 0;
+}
+.sub{color:var(--muted);font-size:14px}
+.hint{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.35}
+.visuals{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px;
+}
+.grinder-card{
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:12px;
+  align-items:center;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+}
+.grinder-card img{
+  width:96px;
+  height:96px;
+  object-fit:contain;
+  background:#f2eee9;
+  border-radius:6px;
+}
+.grinder-name{font-weight:800;margin-bottom:4px}
+.facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:7px;
+}
+.fact{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:3px 7px;
+  color:var(--muted);
+  font-size:11px;
+  background:#fffaf6;
+}
+.thumb{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  vertical-align:middle;
+  margin-right:8px;
+  background:#f2eee9;
+  border-radius:5px;
+}
+.status{
+  border-radius:8px;
+  padding:12px;
+  margin-top:12px;
+  background:var(--accent-soft);
+  color:#16443f;
+  line-height:1.4;
+}
+.status.warn{
+  background:var(--warn-soft);
+  color:var(--warn);
+}
+.chips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:8px;
+  margin-top:10px;
+}
+.chip{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:8px;
+  padding:9px 10px;
+  font-size:13px;
+  color:var(--ink);
+  cursor:pointer;
+  min-height:54px;
+  width:100%;
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:8px;
+  align-items:center;
+  text-align:left;
+  line-height:1.25;
+}
+.chip:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+.brew-icon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  color:var(--accent);
+}
+.brew-icon svg{
+  width:34px;
+  height:34px;
+  display:block;
+}
+.chip-title{
+  display:block;
+  font-weight:800;
+}
+.chip-range{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:620px;
+  margin-top:10px;
+  background:white;
+}
+td,th{
+  border:1px solid var(--line);
+  padding:8px;
+  text-align:left;
+}
+th{background:#eee5dc}
+@media (max-width:760px){
+  .grid,.result,.visuals{grid-template-columns:1fr}
+  .converter-grid{grid-template-columns:1fr}
+  .grinder-card{grid-template-columns:76px 1fr}
+  .grinder-card img{width:76px;height:76px}
+  .status button.secondary{width:100%}
+}
+@media (max-width:520px){
+  .chips{grid-template-columns:1fr}
+  .metric{padding:14px}
+  .thumb{width:34px;height:34px}
+  td,th{padding:7px}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header>
+    <h1>Coffee Grinder Converter v2</h1>
+    <p>Conversion is estimated from particle size in microns. Roast suggestions are starting points; adjust by taste, brewer, and dose.</p>
+  </header>
+
+  <section class="panel">
+    <h2>Converter</h2>
+    <div class="grid converter-grid">
+      <div class="converter-box">
+        <label for="f">From grinder</label>
+        <select id="f" onchange="syncSettingInput()"></select>
+      </div>
+      <div class="converter-box">
+        <label for="s">Setting</label>
+        <input id="s" type="number" step="0.1" value="5.5" oninput="calc()">
+        <div id="settingHelp" class="hint"></div>
+      </div>
+      <div class="converter-box">
+        <label for="t">To grinder</label>
+        <select id="t" onchange="calc()"></select>
+      </div>
+      <div class="converter-box live-result">
+        <span class="sub converter-label">To setting</span>
+        <strong id="toSetting">--</strong>
+        <span id="toSettingNote" class="hint"></span>
+      </div>
+    </div>
+    <div class="visuals">
+      <div class="grinder-card">
+        <img id="fromImg" alt="">
+        <div>
+          <div class="sub">From</div>
+          <div id="fromName" class="grinder-name"></div>
+          <div id="fromMeta" class="hint"></div>
+          <div id="fromInfo" class="facts"></div>
+        </div>
+      </div>
+      <div class="grinder-card">
+        <img id="toImg" alt="">
+        <div>
+          <div class="sub">To</div>
+          <div id="toName" class="grinder-name"></div>
+          <div id="toMeta" class="hint"></div>
+          <div id="toInfo" class="facts"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Roast-aware grind suggestion</h2>
+    <div class="grid">
+      <div>
+        <label for="roast">Roast type</label>
+        <select id="roast" onchange="calc()">
+          <option value="light">Light roast</option>
+          <option value="medium" selected>Medium roast</option>
+          <option value="dark">Dark roast</option>
+        </select>
+      </div>
+      <div>
+        <label for="brew">Brew method</label>
+        <select id="brew" onchange="calc()">
+          <option value="espresso">Espresso</option>
+          <option value="moka">Moka pot</option>
+          <option value="aeropress">AeroPress</option>
+          <option value="pourover" selected>Pour over</option>
+          <option value="drip">Drip machine</option>
+          <option value="frenchpress">French press</option>
+          <option value="coldbrew">Cold brew</option>
+        </select>
+      </div>
+    </div>
+    <div class="result" style="margin-top:14px">
+      <div class="metric">
+        <span class="sub">Current estimated grind size</span>
+        <span class="big" id="micron">-- &micro;m</span>
+        <div id="targetLine" class="sub"></div>
+      </div>
+      <div class="metric">
+        <span class="sub">Suggested range</span>
+        <span class="big" id="suggestion">-- &micro;m</span>
+        <div id="suggestionText" class="sub"></div>
+      </div>
+    </div>
+    <div id="status" class="status"></div>
+    <div class="chips" id="quickRanges"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Equivalent settings</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Grinder</th><th>Equivalent</th><th>Scale</th></tr></thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+    <button id="toggleMore" class="secondary" style="margin-top:12px" onclick="toggleOtherGrinders()">Show other grinders</button>
+  </section>
+</main>
+
+<script>
+const grinders={
+  "Fellow Ode Gen 2":{min:1,max:10,step:0.1,m1:300,m2:1100,u:"dial",note:"Filter-focused grinder; app uses 1.0-10.0 as requested."},
+  "Fellow Opus":{min:1,max:11,step:0.25,m1:180,m2:1300,u:"outer dial",note:"Outer ring is 1-11 with quarter-step marks; inner ring is not modeled."},
+  "KINGrinder K6":{min:0,max:240,step:1,m1:150,m2:1300,u:"clicks",note:"Clicks from burr touch / zero."},
+  "KINGrinder K4":{min:0,max:240,step:1,m1:150,m2:1300,u:"clicks",note:"Clicks from burr touch / zero."},
+  "Comandante C40 MK4":{min:0,max:60,step:1,m1:150,m2:1300,u:"clicks",type:"woodHand",color:"#a86737",note:"MK4 Nitro Blade hand grinder. Count clicks from zero; 12 clicks per full turn. Common starts: espresso 7-13, moka 14-20, pour over 18-35, French press 25-35.",info:["Nitro Blade burr","12 clicks/turn","40g jar option","Filter favorite"]},
+  "Comandante C40 MK4 Red Clix":{min:0,max:120,step:1,m1:150,m2:1300,u:"clicks",type:"woodHand",color:"#bf743b",note:"C40 MK4 with Red Clix axle upgrade. It doubles the click resolution, so roughly 2 Red Clix clicks equal 1 standard C40 click.",info:["Red Clix axle","24 clicks/turn","Finer espresso control","C40 compatible"]},
+  "Comandante C60 Baracuda":{min:0,max:90,step:1,m1:150,m2:1300,u:"clicks",type:"metalHand",color:"#4a4d50",note:"Clicks from zero; C60 uses finer adjustment than C40."},
+  "Mischeif / Mischief M40":{min:0,max:120,step:1,m1:150,m2:1300,u:"clicks",type:"woodHand",color:"#7c4a30",note:"Mischief/MisChief Workshop M40, modeled like a Red Clix-style hand grinder."},
+  "Timemore Chestnut C3":{min:6,max:34,step:1,m1:180,m2:1300,u:"clicks",note:"Clicks from closed; avoid grinding at true zero."},
+  "Timemore Chestnut S3":{min:0,max:10,step:0.1,m1:180,m2:1200,u:"dial",note:"Numbered external dial."},
+  "1Zpresso K-Ultra":{min:0,max:150,step:1,m1:160,m2:1200,u:"clicks",note:"100 clicks per rotation; about 1.5 rotations total."},
+  "1Zpresso ZP6 Special":{min:0,max:100,step:1,m1:250,m2:1100,u:"clicks",note:"90 clicks per rotation; filter-focused practical range."},
+  "1Zpresso J-Ultra":{min:0,max:430,step:1,m1:120,m2:1300,u:"clicks",note:"100 clicks per rotation with espresso-friendly fine steps."},
+  "Baratza Encore":{min:1,max:40,step:1,m1:250,m2:1300,u:"setting",note:"40 stepped hopper settings."},
+  "Baratza Encore ESP":{min:1,max:40,step:1,m1:180,m2:1300,u:"setting",note:"Settings 1-20 are espresso resolution; 21-40 are filter."},
+  "Baratza Virtuoso+":{min:1,max:40,step:1,m1:250,m2:1300,u:"setting",note:"40 stepped hopper settings."},
+  "DF64 Gen 2":{min:0,max:90,step:0.1,m1:150,m2:1200,u:"dial",type:"flatElectric",color:"#343536",note:"Stepless 0-90 numbered ring; burr calibration can shift the range."},
+  "MHW-3BOMBER Blade R3":{min:0,max:180,step:1,m1:165,m2:1180,u:"clicks",type:"blackHand",color:"#151515",note:"Manual grinder; 60 clicks per full turn, modeled as total clicks from zero."},
+  "MHW-3BOMBER F74 Navigator":{min:0,max:9,step:0.1,m1:180,m2:1300,u:"dial",type:"navigator",color:"#151515",note:"Electric grinder with a 0-9 brew scale and 90 markings."}
+};
+
+const roastRanges={
+  light:{
+    note:"Light roasts usually benefit from a slightly finer grind to help extraction.",
+    espresso:[180,300],moka:[300,450],aeropress:[320,550],pourover:[450,700],
+    drip:[550,800],frenchpress:[800,1050],coldbrew:[950,1200]
+  },
+  medium:{
+    note:"Medium roasts are a balanced baseline for most recipes.",
+    espresso:[200,350],moka:[350,500],aeropress:[350,650],pourover:[500,800],
+    drip:[600,900],frenchpress:[850,1100],coldbrew:[1000,1300]
+  },
+  dark:{
+    note:"Dark roasts often taste cleaner a little coarser because they extract quickly.",
+    espresso:[250,400],moka:[400,550],aeropress:[450,700],pourover:[600,900],
+    drip:[700,1000],frenchpress:[900,1200],coldbrew:[1100,1400]
+  }
+};
+
+const brewNames={
+  espresso:"Espresso",moka:"Moka pot",aeropress:"AeroPress",pourover:"Pour over",
+  drip:"Drip machine",frenchpress:"French press",coldbrew:"Cold brew"
+};
+
+const fs=document.getElementById("f");
+const ts=document.getElementById("t");
+const settingInput=document.getElementById("s");
+let showAllGrinders=false;
+Object.keys(grinders).forEach(g=>{
+  fs.add(new Option(g,g));
+  ts.add(new Option(g,g));
+});
+ts.selectedIndex=1;
+
+function toMic(g,v){
+  let d=grinders[g];
+  return d.m1+(v-d.min)*(d.m2-d.m1)/(d.max-d.min);
+}
+
+function fromMic(g,m){
+  let d=grinders[g];
+  return d.min+(m-d.m1)*(d.max-d.min)/(d.m2-d.m1);
+}
+
+function clamp(v,min,max){
+  return Math.min(max,Math.max(min,v));
+}
+
+function formatValue(g,v){
+  let d=grinders[g];
+  let decimals=d.step<1?1:0;
+  return `${v.toFixed(decimals)} ${d.u}`;
+}
+
+function grinderType(name){
+  if(grinders[name].type) return grinders[name].type;
+  if(name.includes("Ode")) return "ode";
+  if(name.includes("Opus")) return "opus";
+  if(name.includes("Baratza")) return "hopper";
+  if(name.includes("DF64")) return "flatElectric";
+  if(name.includes("KINGrinder")) return "blackHand";
+  if(name.includes("1Zpresso")) return "metalHand";
+  if(name.includes("Timemore")) return "metalHand";
+  return "metalHand";
+}
+
+function grinderImage(name){
+  let d=grinders[name];
+  let color=d.color||"#343536";
+  let accent=name.includes("Comandante")||name.includes("Mischief")?"#9a673f":"#18635a";
+  let type=grinderType(name);
+  let body="";
+
+  if(type==="ode"){
+    body=`<rect x="20" y="28" width="112" height="70" rx="5" fill="${color}"/><rect x="92" y="18" width="38" height="14" rx="3" fill="#9ca3a6"/><circle cx="50" cy="62" r="26" fill="#111"/><line x1="50" y1="62" x2="67" y2="45" stroke="#fff" stroke-width="3"/><rect x="50" y="98" width="58" height="36" rx="4" fill="#202020"/><rect x="28" y="134" width="90" height="10" rx="4" fill="#111"/>`;
+  }else if(type==="opus"){
+    body=`<rect x="47" y="24" width="66" height="22" rx="4" fill="${color}"/><rect x="43" y="44" width="74" height="70" rx="8" fill="${color}"/><rect x="51" y="112" width="58" height="38" rx="6" fill="#202020"/><rect x="36" y="148" width="88" height="10" rx="4" fill="#111"/><line x1="51" y1="36" x2="109" y2="36" stroke="#d8d8d8" stroke-width="2"/>`;
+  }else if(type==="hopper"){
+    body=`<path d="M48 18h64l-10 38H58z" fill="#8f989d"/><rect x="42" y="54" width="76" height="88" rx="8" fill="${color}"/><circle cx="80" cy="86" r="25" fill="#191919"/><rect x="54" y="142" width="52" height="16" rx="4" fill="#222"/>`;
+  }else if(type==="flatElectric"){
+    body=`<path d="M52 22h56l-6 28H58z" fill="#9ca3a6"/><rect x="30" y="50" width="100" height="72" rx="7" fill="${color}"/><circle cx="54" cy="84" r="24" fill="#151515"/><rect x="66" y="122" width="50" height="30" rx="5" fill="#202020"/><rect x="24" y="152" width="112" height="8" rx="4" fill="#111"/>`;
+  }else if(type==="navigator"){
+    body=`<rect x="32" y="58" width="96" height="50" rx="5" fill="${color}"/><path d="M86 108h34l18 42H100z" fill="#202020"/><circle cx="44" cy="82" r="25" fill="#111"/><rect x="48" y="24" width="28" height="34" rx="5" fill="#111"/><rect x="42" y="108" width="34" height="42" rx="5" fill="#1f1f1f"/><line x1="24" y1="82" x2="64" y2="82" stroke="${accent}" stroke-width="3"/>`;
+  }else{
+    body=`<rect x="56" y="38" width="48" height="88" rx="9" fill="${color}"/><rect x="58" y="28" width="44" height="16" rx="6" fill="#222"/><rect x="58" y="126" width="44" height="26" rx="6" fill="#292929"/><path d="M80 29 C104 18, 116 28, 127 40" fill="none" stroke="#757575" stroke-width="7" stroke-linecap="round"/><circle cx="133" cy="43" r="13" fill="${accent}"/><line x1="58" y1="58" x2="102" y2="58" stroke="#dedede" stroke-width="2"/><line x1="80" y1="50" x2="80" y2="66" stroke="${accent}" stroke-width="3"/>`;
+  }
+
+  let svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170" role="img" aria-label="${name}"><rect width="160" height="170" rx="10" fill="#f4eee8"/>${body}<text x="80" y="166" text-anchor="middle" font-family="Arial" font-size="11" fill="#6e625b">${name.split(" ")[0]}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function brewIcon(key){
+  const stroke="currentColor";
+  const common=`fill="none" stroke="${stroke}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"`;
+  const icons={
+    espresso:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M12 22h21v5a10 10 0 0 1-10 10h-1a10 10 0 0 1-10-10z"/><path ${common} d="M33 24h3a4 4 0 0 1 0 8h-3"/><path ${common} d="M10 39h28"/><path ${common} d="M18 10v5M24 8v7M30 10v5"/></svg>`,
+    moka:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M17 8h14l3 10H14z"/><path ${common} d="M15 18h18l3 21H12z"/><path ${common} d="M16 28h17"/><path ${common} d="M35 21h4v12h-4"/><path ${common} d="M20 8l-2-4h12l-2 4"/></svg>`,
+    aeropress:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M16 7h16v28H16z"/><path ${common} d="M13 35h22v6H13z"/><path ${common} d="M19 13h10M19 20h10M19 27h10"/></svg>`,
+    pourover:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M14 15h20l-5 18H19z"/><path ${common} d="M17 15l7-8 7 8"/><path ${common} d="M16 37h16"/><path ${common} d="M20 22h8"/></svg>`,
+    drip:`<svg viewBox="0 0 48 48" aria-hidden="true"><rect ${common} x="12" y="7" width="24" height="28" rx="4"/><path ${common} d="M18 15h12M19 35v6h10v-6"/><path ${common} d="M24 20v5"/><path ${common} d="M20 29h8"/></svg>`,
+    frenchpress:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M17 15h14v24H17z"/><path ${common} d="M14 39h20"/><path ${common} d="M24 6v27"/><path ${common} d="M18 10h12"/><path ${common} d="M15 20h18"/><path ${common} d="M31 22h4v9h-4"/></svg>`,
+    coldbrew:`<svg viewBox="0 0 48 48" aria-hidden="true"><path ${common} d="M17 10h14l2 29H15z"/><path ${common} d="M18 10l2-5h8l2 5"/><path ${common} d="M18 26h12"/><path ${common} d="M21 20l6 12M27 20l-6 12"/></svg>`
+  };
+  return icons[key]||icons.pourover;
+}
+
+function scaleText(g){
+  let d=grinders[g];
+  return `${d.min}-${d.max} ${d.u}. ${d.note}`;
+}
+
+function infoChips(g){
+  let items=grinders[g].info||[];
+  return items.map(item=>`<span class="fact">${item}</span>`).join("");
+}
+
+function updateGrinderVisuals(){
+  document.getElementById("fromImg").src=grinderImage(fs.value);
+  document.getElementById("fromImg").alt=fs.value;
+  document.getElementById("fromName").textContent=fs.value;
+  document.getElementById("fromMeta").textContent=scaleText(fs.value);
+  document.getElementById("fromInfo").innerHTML=infoChips(fs.value);
+  document.getElementById("toImg").src=grinderImage(ts.value);
+  document.getElementById("toImg").alt=ts.value;
+  document.getElementById("toName").textContent=ts.value;
+  document.getElementById("toMeta").textContent=scaleText(ts.value);
+  document.getElementById("toInfo").innerHTML=infoChips(ts.value);
+}
+
+function settingForMicron(g,mic){
+  let d=grinders[g];
+  return clamp(fromMic(g,mic),d.min,d.max);
+}
+
+function syncSettingInput(){
+  let d=grinders[fs.value];
+  settingInput.min=d.min;
+  settingInput.max=d.max;
+  settingInput.step=d.step;
+  settingInput.value=clamp(parseFloat(settingInput.value)||d.min,d.min,d.max).toFixed(d.step<1?1:0);
+  document.getElementById("settingHelp").innerHTML=`Range: <b>${d.min}-${d.max} ${d.u}</b>. ${d.note}`;
+  calc();
+}
+
+function applyPreset(brew){
+  let roast=document.getElementById("roast").value;
+  let range=roastRanges[roast][brew];
+  let d=grinders[fs.value];
+  document.getElementById("brew").value=brew;
+  settingInput.value=settingForMicron(fs.value,range[0]).toFixed(d.step<1?1:0);
+  calc();
+}
+
+function toggleOtherGrinders(){
+  showAllGrinders=!showAllGrinders;
+  calc();
+}
+
+function formatMic(range){
+  return `${range[0]}-${range[1]} &micro;m`;
+}
+
+function rangeStatus(mic,range){
+  if(mic<range[0]) return {kind:"warn",text:`Your current setting is finer than the suggested range. Try coarser by about ${(range[0]-mic).toFixed(0)} &micro;m.`};
+  if(mic>range[1]) return {kind:"warn",text:`Your current setting is coarser than the suggested range. Try finer by about ${(mic-range[1]).toFixed(0)} &micro;m.`};
+  return {kind:"ok",text:"Your current setting is inside the suggested range."};
+}
+
+function calc(){
+  let setting=parseFloat(settingInput.value);
+  if(Number.isNaN(setting)) return;
+  let fromData=grinders[fs.value];
+  setting=clamp(setting,fromData.min,fromData.max);
+
+  let mic=toMic(fs.value,setting);
+  let target=fromMic(ts.value,mic);
+  let targetData=grinders[ts.value];
+  let targetOutside=target<targetData.min||target>targetData.max;
+  let targetShown=formatValue(ts.value,clamp(target,targetData.min,targetData.max));
+  let roast=document.getElementById("roast").value;
+  let brew=document.getElementById("brew").value;
+  let range=roastRanges[roast][brew];
+  let status=rangeStatus(mic,range);
+
+  document.getElementById("micron").innerHTML=`${mic.toFixed(0)} &micro;m`;
+  document.getElementById("targetLine").innerHTML=`${ts.value}: <b>${targetShown}</b>${targetOutside?" <span class='sub'>(limit)</span>":""}`;
+  document.getElementById("toSetting").textContent=targetShown;
+  document.getElementById("toSettingNote").textContent=targetOutside?"Closest available setting on this grinder":"Live equivalent setting";
+  document.getElementById("suggestion").innerHTML=formatMic(range);
+  document.getElementById("suggestionText").textContent=`${brewNames[brew]} with ${roast} roast. ${roastRanges[roast].note}`;
+
+  let statusBox=document.getElementById("status");
+  statusBox.className=`status ${status.kind==="warn"?"warn":""}`;
+  statusBox.innerHTML=`${status.text} <button class="secondary" onclick="applyPreset('${brew}')">Use ${brewNames[brew]} start</button>`;
+  updateGrinderVisuals();
+
+  tb.innerHTML="";
+  const priority=["Fellow Ode Gen 2","Fellow Opus","KINGrinder K6"];
+  const ordered=[...priority,...Object.keys(grinders).filter(g=>!priority.includes(g))];
+  ordered.forEach((g,index)=>{
+    if(index>=3&&!showAllGrinders) return;
+    let v=fromMic(g,mic);
+    let d=grinders[g];
+    let outside=v<d.min||v>d.max;
+    let shown=formatValue(g,clamp(v,d.min,d.max));
+    tb.innerHTML+=`<tr><td><img class="thumb" src="${grinderImage(g)}" alt="">${g}</td><td>${shown}${outside?" <span class='sub'>(limit)</span>":""}</td><td>${d.min}-${d.max} ${d.u}</td></tr>`;
+  });
+  let toggle=document.getElementById("toggleMore");
+  toggle.textContent=showAllGrinders?"Hide other grinders":"Show other grinders";
+
+  let quick=document.getElementById("quickRanges");
+  quick.innerHTML="";
+  Object.keys(brewNames).forEach(key=>{
+    let item=document.createElement("button");
+    item.type="button";
+    item.className="chip";
+    item.onclick=()=>applyPreset(key);
+    item.title=`Set ${fs.value} to the minimum ${brewNames[key]} range for this roast`;
+    item.innerHTML=`<span class="brew-icon">${brewIcon(key)}</span><span><span class="chip-title">${brewNames[key]}</span><span class="chip-range">${formatMic(roastRanges[roast][key])}</span></span>`;
+    quick.appendChild(item);
+  });
+}
+
+syncSettingInput();
+</script>
+</body>
+</html>
