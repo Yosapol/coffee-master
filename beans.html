@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coffee Master | Bean Variety</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Coffee Master home">
+        <span class="brand-mark"></span>
+        <span>Coffee Master</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="index.html">Coffee grinder</a>
+        <a class="nav-link active" href="beans.html">Bean variety</a>
+        <a class="nav-link" href="recipes.html">Pour over</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero bean-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Origin library</p>
+          <h1>Find a bean that fits your taste.</h1>
+          <p class="hero-text">
+            Browse origin stories, growing places, flavor profiles, and tasting notes,
+            then pair the bean with a grind style that helps it shine.
+          </p>
+        </div>
+        <figure class="bean-hero-image">
+          <img src="assets/coffee-bean-mosaic.svg" alt="Four styles of roasted coffee beans on a warm tabletop">
+        </figure>
+      </section>
+
+      <section class="bean-type-grid" aria-label="Coffee bean species overview">
+        <article class="type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Arabica_Coffee.jpg" alt="Arabica coffee photo">
+          <div>
+            <h2>Arabica</h2>
+            <p>Most specialty coffee comes from Arabica. It usually has more aroma, acidity, sweetness, and origin clarity.</p>
+          </div>
+        </article>
+        <article class="type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans_robusta.jpg" alt="Robusta coffee beans photo">
+          <div>
+            <h2>Robusta</h2>
+            <p>Robusta is stronger, more bitter, higher in caffeine, and prized for body and crema in espresso blends.</p>
+          </div>
+        </article>
+        <article class="type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5594972157).jpg" alt="Liberica coffee plant photo">
+          <div>
+            <h2>Liberica</h2>
+            <p>Liberica has large beans and a bold, unusual profile that can taste woody, smoky, fruity, and floral.</p>
+          </div>
+        </article>
+        <article class="type-card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5597934575).jpg" alt="Excelsa coffee plant photo">
+          <div>
+            <h2>Excelsa</h2>
+            <p>Excelsa is commonly treated as a Liberica variety, known for tart fruit, depth, and a distinctive finish.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="bean-filter-panel" aria-label="Bean recommendation filters">
+        <div class="bean-filter-row">
+          <span class="filter-title">Bean type</span>
+          <div class="filter-group" role="list" aria-label="Coffee bean type filters">
+            <button class="type-button active" data-type-filter="all">All</button>
+            <button class="type-button" data-type-filter="arabica">Arabica</button>
+            <button class="type-button" data-type-filter="robusta">Robusta</button>
+            <button class="type-button" data-type-filter="liberica">Liberica</button>
+            <button class="type-button" data-type-filter="excelsa">Excelsa</button>
+            <button class="type-button" data-type-filter="rare">Rare</button>
+            <button class="type-button" data-type-filter="hybrid">Hybrid</button>
+          </div>
+        </div>
+        <div class="bean-filter-row">
+          <span class="filter-title">Taste</span>
+          <div class="filter-group" role="list" aria-label="Flavor filters">
+            <button class="filter-button active" data-filter="all">All</button>
+            <button class="filter-button" data-filter="bright">Bright</button>
+            <button class="filter-button" data-filter="sweet">Sweet</button>
+            <button class="filter-button" data-filter="bold">Bold</button>
+            <button class="filter-button" data-filter="earthy">Earthy</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bean-grid" id="bean-list" aria-label="Coffee bean varieties">
+        <article class="bean-card" data-type="arabica" data-tags="bright sweet">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Arabica_Coffee.jpg" alt="Ethiopian heirloom Arabica coffee photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light roast</span>
+              <span>Pour over</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Ethiopian Heirloom</h2>
+            <p class="story">
+              Born from ancient arabica forests, Ethiopian heirloom coffee carries a wild, floral identity shaped by small farms and careful drying beds.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Yirgacheffe highlands, 1,800-2,200 meters, shade-grown garden farms.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Elegant, tea-like body with sparkling acidity and a clean finish.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Jasmine, bergamot, lemon zest, peach, black tea.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_De_Colombia_Listo_Para_Molienda.jpg" alt="Colombian Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Espresso</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Colombian Caturra</h2>
+            <p class="story">
+              This variety is grown on steep Andean slopes where family farms wash and ferment cherries for clarity, sweetness, and balance.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Huila and Tolima, volcanic soil, 1,500-1,900 meters, hand-picked harvest.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Rounded sweetness, medium body, bright acidity, dependable structure.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Red apple, caramel, orange peel, panela, milk chocolate.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bold">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Closer_look_at_our_roasted_coffee_beans.jpg" alt="Brazilian Bourbon roasted Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium-dark roast</span>
+              <span>Milk drinks</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Brazilian Bourbon</h2>
+            <p class="story">
+              Slow sun-drying on wide patios gives Brazilian bourbon a dessert-like comfort, making it a favorite foundation for espresso blends.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Cerrado Mineiro, rolling estates, dry harvest weather, 900-1,250 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Low acidity, creamy texture, nutty sweetness, forgiving extraction.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Hazelnut, cocoa, brown sugar, dried cherry, toasted almond.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="bold earthy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans.jpg" alt="Sumatra roasted Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Dark roast</span>
+              <span>French press</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Sumatra Mandheling</h2>
+            <p class="story">
+              Wet-hulled processing and humid mountain farms create a dense, savory coffee with a deep character and a long, spicy finish.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Lake Toba region, rich volcanic land, 1,100-1,600 meters, smallholder farms.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Heavy body, low acidity, syrupy mouthfeel, earthy complexity.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Dark chocolate, cedar, baking spice, tobacco leaf, molasses.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="bright bold">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_look_at_roasted_and_fresh_coffee_beans.jpg" alt="Kenyan SL28 Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light-medium roast</span>
+              <span>Pour over</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Kenyan SL28</h2>
+            <p class="story">
+              Selected for drought resistance and cup quality, SL28 became one of Kenya's most recognizable coffees through cooperative washing stations and meticulous sorting.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Nyeri and Kirinyaga, red volcanic soil, 1,600-2,000 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Juicy, structured, high acidity, syrupy sweetness.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Blackcurrant, grapefruit, tomato leaf, cane sugar, hibiscus.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bold">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Closeup_of_Coffee_Beans.jpg" alt="Guatemala Antigua Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Drip machine</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Guatemala Antigua</h2>
+            <p class="story">
+              Antigua coffee grows between volcanoes, where cool nights and mineral-rich soil create a steady sweetness that works beautifully as a daily cup.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Antigua valley, Guatemala, volcanic slopes around 1,500-1,800 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Balanced body, gentle acidity, cocoa depth, clean sweetness.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Cocoa, orange, spice, brown sugar, roasted almond.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_de_Costa_Rica.jpg" alt="Costa Rica Tarrazu Arabica coffee photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>AeroPress</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Costa Rica Tarrazu</h2>
+            <p class="story">
+              Tarrazu producers are known for precise milling and honey processing, creating coffees that bridge crisp fruit and rounded sweetness.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Tarrazu, Costa Rica, mountain farms at 1,400-1,900 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Clean, honeyed, lively acidity, medium body.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Orange blossom, honey, green apple, vanilla, nougat.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="bright sweet">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Roasted_Coffee_Beans_Texture.jpg" alt="Panama Geisha Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light roast</span>
+              <span>Manual brew</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Panama Geisha</h2>
+            <p class="story">
+              Geisha became famous in Panama for its perfume-like aromatics and delicate structure, especially from high farms near cloud forest conditions.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Boquete, Panama, cool highland farms around 1,600-2,000 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Elegant, floral, silky, complex, tea-like.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Jasmine, mango, lime, bergamot, honey.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffe_Beans.jpg" alt="Rwanda Bourbon Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light-medium roast</span>
+              <span>Pour over</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Rwanda Bourbon</h2>
+            <p class="story">
+              Rwandan bourbon is often processed through community washing stations, giving smallholder harvests a clean and polished fruit character.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Lake Kivu region, Rwanda, steep farms at 1,500-2,000 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Juicy acidity, soft body, balanced fruit sweetness.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Red currant, mandarin, black tea, honey, clove.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="earthy sweet">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Market_Square_stall_Saffron_Walden_02.jpg" alt="Yemen Mocha Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Moka pot</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Yemen Mocha</h2>
+            <p class="story">
+              One of coffee's oldest trade identities, Yemen Mocha is shaped by terraced mountain farms, dry processing, and intensely concentrated cherries.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Haraz and Bani Matar, Yemen, terraced farms at 1,700-2,200 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Rustic, winey, complex, dense sweetness.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Cacao nib, dried fig, cardamom, raisin, red wine.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="earthy bold">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_tostado_en_grano_.jpg" alt="India Monsooned Malabar coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium-dark roast</span>
+              <span>Espresso</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Monsooned Malabar</h2>
+            <p class="story">
+              Exposed to humid monsoon winds after harvest, this Indian coffee becomes pale, low-acid, and unusually heavy in the cup.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Malabar Coast, India, aged in open-sided warehouses during monsoon season.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Low acidity, huge body, mellow spice, crema-friendly espresso.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Walnut, leather, cedar, malt, dark cocoa.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_hecho_en_M%C3%A9xico.JPG" alt="Mexico Chiapas Arabica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Drip machine</span>
+              <span>Arabica</span>
+            </div>
+            <h2>Mexico Chiapas</h2>
+            <p class="story">
+              Chiapas coffees often come from small farms near forested highlands, offering a soft, approachable profile for everyday brewing.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Sierra Madre de Chiapas, Mexico, shade-grown farms at 900-1,700 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Gentle acidity, light body, clean sweetness, easy drinking.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Milk chocolate, pear, cinnamon, toasted sugar, citrus.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="robusta" data-tags="bold earthy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans_robusta.jpg" alt="Robusta coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium-dark roast</span>
+              <span>Espresso blend</span>
+              <span>Robusta</span>
+            </div>
+            <h2>Vietnamese Robusta</h2>
+            <p class="story">
+              Robusta is central to Vietnam's coffee culture, thriving in warmer lowland farms and bringing the strong base used for phin coffee and espresso crema.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Central Highlands of Vietnam, especially Dak Lak and Lam Dong, roughly 500-1,200 meters.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Heavy body, high caffeine, strong bitterness, thick crema.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Dark chocolate, roasted peanut, molasses, malt, bitter cocoa.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="robusta" data-tags="bold sweet">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_robusta.jpg" alt="Robusta coffee photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Dark roast</span>
+              <span>Milk drinks</span>
+              <span>Robusta</span>
+            </div>
+            <h2>Ugandan Robusta</h2>
+            <p class="story">
+              Uganda is part of Robusta's natural home, where hardy coffee trees produce dense beans that can add structure and punch to blends.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Lake Victoria basin and central Uganda, warm humid farms at lower elevations.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Powerful, creamy, low acidity, blend-friendly intensity.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Walnut, cacao, brown sugar, black pepper, toasted grain.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="liberica" data-tags="earthy bold">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5594972157).jpg" alt="Liberica coffee plant photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Manual brew</span>
+              <span>Liberica</span>
+            </div>
+            <h2>Philippine Barako</h2>
+            <p class="story">
+              Barako is a beloved Liberica identity in the Philippines, known for large beans, powerful aroma, and a taste that stands apart from typical Arabica.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Batangas and Cavite, Philippines, warm farms with tall Liberica trees.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Bold aroma, full body, low acidity, rustic sweetness.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Jackfruit, smoke, dark sugar, spice, toasted wood.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="liberica" data-tags="sweet earthy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_Lib%C3%A9ria.jpg" alt="Liberica coffee beans photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>French press</span>
+              <span>Liberica</span>
+            </div>
+            <h2>Malaysian Liberica</h2>
+            <p class="story">
+              Liberica has deep roots in Malaysia, especially in farms that value its resilience, large leaves, and unusually fragrant cup character.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Johor and Selangor, Malaysia, lowland tropical farms.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Round, fruity, smoky, rich body, distinctive aroma.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Ripe banana, palm sugar, cedar, cacao, floral spice.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="excelsa" data-tags="bright earthy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5597934575).jpg" alt="Excelsa coffee plant photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Blend component</span>
+              <span>Excelsa</span>
+            </div>
+            <h2>Excelsa Dewevrei</h2>
+            <p class="story">
+              Excelsa is often classified as a Liberica variety, but roasters treat it separately because it brings tart fruit and a layered finish.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Southeast Asia and parts of Central Africa, commonly grown on tall, hardy trees.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Tart, fruity, complex, medium body, unusual depth.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Tamarind, dark berry, cocoa husk, spice, dried fruit.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="rare" data-tags="bright sweet">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_stenophylla_kz01.jpg" alt="Stenophylla coffee plant photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light roast</span>
+              <span>Rare tasting</span>
+              <span>Stenophylla</span>
+            </div>
+            <h2>Stenophylla</h2>
+            <p class="story">
+              Stenophylla is a rare West African coffee species gaining attention for climate resilience and a cup quality that can resemble fine Arabica.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Sierra Leone and neighboring West African regions, historically grown in warm conditions.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Sweet, delicate, bright, elegant, aromatic.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Peach, elderflower, citrus, honey, black tea.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="rare" data-tags="sweet earthy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_racemosa.jpg" alt="Racemosa coffee plant photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Light-medium roast</span>
+              <span>Experimental brew</span>
+              <span>Racemosa</span>
+            </div>
+            <h2>Racemosa</h2>
+            <p class="story">
+              Racemosa is a low-caffeine wild coffee species from southern Africa, more often seen in research and specialty experiments than everyday cafes.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Mozambique and South Africa, dry coastal forest environments.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Light body, herbal sweetness, gentle acidity, unusual aromatics.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Herbs, raisin, tea, soft citrus, toasted grain.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="bean-card" data-type="hybrid" data-tags="sweet bright">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/15_grams_of_coffee_roasted_to_different_degrees.jpg" alt="Hybrid coffee beans roasted to different degrees photo">
+          <div class="bean-card-body">
+            <div class="bean-meta">
+              <span>Medium roast</span>
+              <span>Filter or espresso</span>
+              <span>Hybrid</span>
+            </div>
+            <h2>Catimor Hybrid</h2>
+            <p class="story">
+              Catimor families combine Arabica cup potential with Robusta-related disease resistance, making them important in farms facing leaf rust pressure.
+            </p>
+            <dl>
+              <div>
+                <dt>Agriculture place</dt>
+                <dd>Common in Southeast Asia and Latin America, especially humid farms needing stronger disease resistance.</dd>
+              </div>
+              <div>
+                <dt>Profile</dt>
+                <dd>Practical, sweet, medium body, clean when carefully processed.</dd>
+              </div>
+              <div>
+                <dt>Origin taste notes</dt>
+                <dd>Chocolate, citrus, brown sugar, mild herbs, roasted nuts.</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

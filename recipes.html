@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coffee Master | Pour Over Recipes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Coffee Master home">
+        <span class="brand-mark"></span>
+        <span>Coffee Master</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="index.html">Coffee grinder</a>
+        <a class="nav-link" href="beans.html">Bean variety</a>
+        <a class="nav-link active" href="recipes.html">Pour over</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero recipe-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Popular pour-over recipes</p>
+          <h1>Seven brewers who shaped the conversation.</h1>
+          <p class="hero-text">
+            Explore three published or closely associated recipes from each brewer.
+            Start with their method, then adjust grind and temperature by taste.
+          </p>
+        </div>
+        <figure class="bean-hero-image recipe-photo">
+          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Tasty_Coffee_pourover_V60_bloom_2025.jpg?width=1280" alt="Fresh coffee blooming inside a V60 pour-over dripper">
+          <figcaption>
+            Photo: <a href="https://commons.wikimedia.org/wiki/File:Tasty_Coffee_pourover_V60_bloom_2025.jpg" target="_blank" rel="noopener">Indigo.udm / Wikimedia Commons</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="recipe-intro" aria-labelledby="recipe-list-title">
+        <div>
+          <p class="eyebrow">Barista recipe library</p>
+          <h2 id="recipe-list-title">Choose a brewer, then choose their recipe.</h2>
+        </div>
+        <p>Recipe buttons update the measurements and pour sequence inside each brewer's card.</p>
+      </section>
+
+      <section class="recipe-grid" id="recipeGrid" aria-label="Popular pour-over brewers and recipes"></section>
+    </main>
+    <script src="recipes.js"></script>
+  </body>
+</html>
