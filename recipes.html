@@ -1,55 +1,33 @@
 <!doctype html>
 <html lang="en">
   <head>
+<script src="theme.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coffee Master | Pour Over Recipes</title>
+    <title>Coffee Master | Famous Brewers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Coffee Master home">
-        <span class="brand-mark"></span>
-        <span>Coffee Master</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a class="nav-link" href="index.html">Coffee grinder</a>
-        <a class="nav-link" href="beans.html">Bean variety</a>
-        <a class="nav-link active" href="recipes.html">Pour over</a>
-      </nav>
-    </header>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-    <main>
+    <link rel="stylesheet" href="site.css">
+  <script src="cup-data.js" defer></script><script src="site.js" defer></script><script src="cup.js" defer></script><script src="recipes.js" defer></script><link rel="icon" href="assets/mood-bean.svg" type="image/svg+xml"><meta name="theme-color" content="#faf7f0">
+</head>
+  <body class="coffee-page recipes-page">
+    <a class="skip-link" href="#main-content">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><nav id="main-navigation" class="main-nav" aria-label="Main navigation"><a href="index.html#finder">Find your cup</a><details class="nav-group current-group"><summary>Brew tools</summary><div class="nav-links"><a href="grinder.html">Grinder settings</a><a href="recipes.html" aria-current="page">Recipes</a><a href="dial-in.html">Fix my cup</a></div></details><details class="nav-group"><summary>Coffee journal</summary><div class="nav-links"><a href="knowledge.html">Coffee journal</a><a href="beans.html">Beans & origins</a><a href="brewing.html">Brewing methods</a><a href="water.html">Water</a><a href="equipment.html">Equipment</a><a href="thai-coffee.html">Thai coffee</a></div></details></nav><div class="header-actions"><button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Enable dark mode"><span aria-hidden="true">☾</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu <span aria-hidden="true">☰</span></button></div></header>
+
+    <main id="main-content"><div class="page-trail"><a data-context-link href="index.html">Home</a> <span aria-hidden="true"> / </span> Recipes</div>
       <section class="hero recipe-hero">
         <div class="hero-copy">
-          <p class="eyebrow">Popular pour-over recipes</p>
-          <h1>Seven brewers who shaped the conversation.</h1>
-          <p class="hero-text">
-            Explore three published or closely associated recipes from each brewer.
-            Start with their method, then adjust grind and temperature by taste.
-          </p>
+          <p class="eyebrow">Famous pour-over brewers</p>
+          <h1>Famous brewers, practical recipes.</h1>
+          <p class="hero-text">Pick a brewer, try a recipe, and make it your own.</p>
         </div>
-        <figure class="bean-hero-image recipe-photo">
-          <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Tasty_Coffee_pourover_V60_bloom_2025.jpg?width=1280" alt="Fresh coffee blooming inside a V60 pour-over dripper">
-          <figcaption>
-            Photo: <a href="https://commons.wikimedia.org/wiki/File:Tasty_Coffee_pourover_V60_bloom_2025.jpg" target="_blank" rel="noopener">Indigo.udm / Wikimedia Commons</a>
-          </figcaption>
-        </figure>
+        <figure class="hero-art"><img src="assets/watercolor-brew.webp" width="1000" height="667" alt="Watercolor pour-over brewer, glass server and sage coffee mug" fetchpriority="high"></figure>
       </section>
+<div id="journey-context" class="journey-context" hidden></div>
 
-      <section class="recipe-intro" aria-labelledby="recipe-list-title">
-        <div>
-          <p class="eyebrow">Barista recipe library</p>
-          <h2 id="recipe-list-title">Choose a brewer, then choose their recipe.</h2>
-        </div>
-        <p>Recipe buttons update the measurements and pour sequence inside each brewer's card.</p>
-      </section>
+      <section class="recipe-workspace" aria-label="Choose a brewer and recipe"><aside class="brewer-picker"><p class="eyebrow">FIND YOUR INSPIRATION</p><h2>Choose a brewer</h2><div id="brewer-options" class="brewer-options" role="group" aria-label="Brewers"></div></aside><div id="recipeGrid"></div></section><section class="next-steps" aria-label="Continue your coffee journey"><p class="eyebrow">YOUR NEXT LITTLE STEP</p><h2 id="section-keep-making-it-your-own">Get to know your ingredients.</h2><p>Explore bean profiles and the water you use. Your recipe’s grind and taste tools are above.</p><div class="next-actions"><a class="button" data-context-link href="beans.html">Explore beans ↗</a><a class="button" data-context-link href="water.html">Understand brew water ↗</a></div></section></main>
 
-      <section class="recipe-grid" id="recipeGrid" aria-label="Popular pour-over brewers and recipes"></section>
-    </main>
-    <script src="recipes.js"></script>
-  </body>
+  <footer class="site-footer wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><p>A little more feeling in every cup.</p><a class="text-link" href="knowledge.html">Keep exploring coffee ↗</a></footer>
+</body>
 </html>

@@ -1,0 +1,6 @@
+const http=require('node:http'),fs=require('node:fs/promises'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),port=Number(process.env.PORT||4173);
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.json':'application/json'};
+const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'http://localhost');const route=decodeURIComponent(url.pathname);const file=path.resolve(root,'.'+(route==='/'?'/index.html':route));if(!file.startsWith(root+path.sep)||route.split('/').some(s=>s.startsWith('.'))){res.writeHead(403);return res.end('Forbidden');}const data=await fs.readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);}catch{res.writeHead(404);res.end('Not found');}});
+server.on('error',e=>{console.error(e.code==='EADDRINUSE'?`Port ${port} is already in use. Stop the existing preview or set PORT.`:e.message);process.exit(1)});
+server.listen(port,'127.0.0.1',()=>console.log(`Coffee Master preview: http://127.0.0.1:${port}`));

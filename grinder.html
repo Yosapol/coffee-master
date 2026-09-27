@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<script src="theme.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coffee Master | Grinder Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="site.css">
+  <script src="cup-data.js" defer></script><script src="site.js" defer></script><script src="cup.js" defer></script><script src="script.js" defer></script><link rel="icon" href="assets/mood-bean.svg" type="image/svg+xml"><meta name="theme-color" content="#faf7f0">
+</head>
+  <body class="coffee-page grinder-page">
+    <a class="skip-link" href="#main-content">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><nav id="main-navigation" class="main-nav" aria-label="Main navigation"><a href="index.html#finder">Find your cup</a><details class="nav-group current-group"><summary>Brew tools</summary><div class="nav-links"><a href="grinder.html" aria-current="page">Grinder settings</a><a href="recipes.html">Recipes</a><a href="dial-in.html">Fix my cup</a></div></details><details class="nav-group"><summary>Coffee journal</summary><div class="nav-links"><a href="knowledge.html">Coffee journal</a><a href="beans.html">Beans & origins</a><a href="brewing.html">Brewing methods</a><a href="water.html">Water</a><a href="equipment.html">Equipment</a><a href="thai-coffee.html">Thai coffee</a></div></details></nav><div class="header-actions"><button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Enable dark mode"><span aria-hidden="true">☾</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu <span aria-hidden="true">☰</span></button></div></header>
+
+    <main id="main-content"><div class="page-trail"><a data-context-link href="index.html">Home</a> <span aria-hidden="true"> / </span> Grinder settings</div>
+      <section class="hero grind-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Your everyday coffee tools</p>
+          <h1>A good cup starts with a little guidance.</h1>
+          <p class="hero-text">Find a starting setting, then fine-tune by taste.</p>
+        </div>
+        <figure class="hero-art" aria-hidden="true"><img src="assets/coffee-watercolor.webp" width="1152" height="768" alt=""></figure>
+      </section>
+<div id="journey-context" class="journey-context" hidden></div>
+
+<section class="tool-section" id="converter" aria-labelledby="grinder-title">
+<div class="section-heading"><p class="eyebrow">A LITTLE GUIDANCE FOR YOUR GRIND</p><h2 id="grinder-title">One grinder. Or one to another.</h2><p>Start with a useful reference, then let your cup guide the next adjustment.</p></div>
+<div class="segmented" role="group" aria-label="Grinder tool mode"><button id="mode-start" type="button" aria-pressed="true">Find my starting setting</button><button id="mode-convert" type="button" aria-pressed="false">Convert a setting</button></div>
+<div class="tool-layout">
+ <section class="panel tool-form" aria-labelledby="grinder-form-title"><h2 id="grinder-form-title">What are you brewing with?</h2>
+ <div class="form-field"><label id="from-label" for="f">Your grinder</label><select id="f"></select><div class="grinder-mini"><img id="fromImg" alt="" width="60" height="65"><p id="fromMeta"></p></div></div>
+ <div class="form-row"><div class="form-field"><label for="brew">Brew method</label><select id="brew"><option value="">Choose your method</option><option value="espresso">Espresso</option><option value="moka">Moka pot</option><option value="aeropress">AeroPress</option><option value="pourover">Pour over</option><option value="drip">Drip machine</option><option value="frenchpress">French press</option><option value="coldbrew">Cold brew</option></select></div><div class="form-field"><label for="roast">Roast level</label><select id="roast"><option value="">Choose your roast</option><option value="light">Light roast</option><option value="medium" selected>Medium roast</option><option value="dark">Dark roast</option></select></div></div>
+ <p id="roast-context" class="hint" hidden></p>
+ <div id="conversion-fields" hidden><div class="form-field"><label for="s">Your current setting</label><input id="s" type="number" step="any" value="5.33" inputmode="decimal" aria-describedby="settingHelp setting-error"><p id="settingHelp" class="hint"></p><p id="setting-error" class="field-error" role="status"></p></div><div class="form-field"><label for="t">Convert to grinder</label><select id="t"></select><div class="grinder-mini"><img id="toImg" alt="" width="60" height="65"><p id="toMeta"></p></div></div></div>
+ </section>
+ <section id="grinder-result" class="result-card" aria-live="polite" aria-atomic="true"><p class="eyebrow">YOUR STARTING POINT</p><h2>Make it your own.</h2><p>Choose your brew method to see a starting setting.</p></section>
+</div>
+<details id="grinder-guidance"><summary>How to use these starting points</summary><p>Grinder numbers are brand-specific. Reference ranges vary with calibration, burrs, recipe, and coffee. A conversion is an approximate estimate, not a measurement of particle size.</p><div id="grinder-facts" class="grinder-facts"></div><p id="roast-guidance"></p><p id="conversion-explanation"></p><div class="preset-heading"><h3>Explore a method</h3></div><div id="quickRanges" class="chips" role="group" aria-label="Brew method presets"></div></details>
+<details id="grinder-references"><summary>Grinder reference table & sources</summary><p class="source-line">Manufacturer references, community reports, and inferred ranges are labeled separately. Select a brew method to compare starting points.</p><div class="table-wrap"><table><thead><tr><th>Grinder</th><th>Starting point & source</th><th>Scale</th></tr></thead><tbody id="tb"></tbody></table></div><button id="toggleMore" class="secondary table-toggle" type="button">Show other grinders</button></details>
+</section><section class="next-steps" aria-label="Continue your coffee journey"><p class="eyebrow">YOUR NEXT LITTLE STEP</p><h2 id="section-keep-making-it-your-own">Still getting to know your setup?</h2><p>Explore equipment guidance or choose beans for the flavors you enjoy.</p><div class="next-actions"><a class="button" data-context-link href="equipment.html">Understand your equipment ↗</a><a class="button" data-context-link href="beans.html">Explore beans ↗</a></div></section></main>
+
+
+  <footer class="site-footer wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><p>A little more feeling in every cup.</p><a class="text-link" href="knowledge.html">Keep exploring coffee ↗</a></footer>
+</body>
+</html>

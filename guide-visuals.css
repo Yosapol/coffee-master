@@ -1,0 +1,36 @@
+/* Water and brewing companions to the shared pastel journal. */
+.guide-intro-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.water-card-art{display:grid;place-items:center;height:160px;margin:-6px -6px 20px;border-radius:12px;background:var(--sky)}
+.water-page .kb-card:nth-child(2) .water-card-art{background:var(--lavender)}
+.water-page .kb-card:nth-child(3) .water-card-art{background:var(--tint)}
+.water-card-art img{display:block;width:220px;height:160px;object-fit:contain}
+.water-issue-art{display:grid;place-items:center;flex:0 0 92px;width:92px;height:92px;border-radius:16px;background:var(--butter)}
+.water-issue-art img{width:100%;height:100%;object-fit:contain;display:block}
+.water-fixes details:nth-child(2) .water-issue-art{background:var(--sky)}
+.water-fixes details:nth-child(3) .water-issue-art{background:var(--rose)}
+.water-fixes details:nth-child(4) .water-issue-art{background:var(--lavender)}
+.water-fixes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.water-fixes details{margin:0;padding:16px 20px;background:var(--paper)}
+.water-fixes summary{justify-content:flex-start;gap:12px;font-size:16px}.water-fixes summary:after{margin-left:auto}
+.water-fixes dl>div:first-child{border:0}.water-fixes dd{font-size:15px;color:var(--ink)}
+.water-fixes dt{font-size:11px;letter-spacing:1px;text-transform:uppercase}.water-fixes dl>div:last-child{background:var(--sky);padding:15px;border:0;border-radius:10px;margin-top:8px}
+.guide-note{font-size:13px;color:var(--muted);margin:20px 0 0;max-width:70ch}
+.brewing-page .section-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;border:0;padding:0;margin-bottom:32px}
+.brewing-page .section-nav a{flex-direction:column;justify-content:center;gap:10px;text-align:center;border-radius:16px;padding:18px 8px;background:var(--wash,var(--tint));transition:transform .18s,border-color .18s}
+.brewing-page .section-nav a:hover{transform:translateY(-3px);border-color:var(--sage)}
+.brewing-page .section-nav img{width:50px;height:50px}.brewing-page .section-nav a:nth-child(2),.brewing-page .guide-card:nth-child(2){--wash:var(--rose)}
+.brewing-page .section-nav a:nth-child(3),.brewing-page .guide-card:nth-child(3){--wash:var(--butter)}
+.brewing-page .section-nav a:nth-child(4),.brewing-page .guide-card:nth-child(4){--wash:var(--lavender)}
+.brewing-page .section-nav a:nth-child(5),.brewing-page .guide-card:nth-child(5){--wash:var(--clay)}
+.brewing-page .section-nav a:nth-child(6),.brewing-page .guide-card:nth-child(6){--wash:var(--sky)}
+.brewing-page .guide-card{display:flex;flex-direction:column;min-width:0;padding:22px}.brewing-page .method-card-media{height:132px;background:var(--wash,var(--tint));position:relative;overflow:hidden}
+.brewing-page .method-card-media:before{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:var(--surface);opacity:.45}
+.brewing-page .method-card-media img{position:relative;width:90px;height:90px}.brewing-page .guide-card h2{margin-bottom:10px}
+.method-character{color:var(--muted);font-size:14px;min-height:48px;margin-bottom:20px}.brewing-page .guide-card>dl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.brewing-page .guide-card>dl>div{border:0;background:var(--paper);padding:12px;border-radius:10px}.brewing-page .guide-card>dl>div:nth-child(2){grid-column:1/-1;grid-row:2}
+.brewing-page .guide-card>dl dd{font-weight:500}.brewing-page .guide-card details{padding:10px 13px;font-size:13px}.brewing-page .guide-card details summary{font-size:13px}
+.brewing-page .guide-card>.text-link{margin-top:auto;display:flex;align-items:center;min-height:44px;font-size:14px}
+@media(max-width:960px){.brewing-page .method-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brewing-page .section-nav{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.water-fixes{grid-template-columns:1fr}}
+@media(max-width:520px){.brewing-page .method-guide-grid{grid-template-columns:1fr}.brewing-page .section-nav{gap:8px}.brewing-page .section-nav a{font-size:12px;padding:13px 5px}.brewing-page .section-nav img{width:42px;height:42px}.method-character{min-height:0}.water-fixes details{padding:12px}.water-issue-art{flex-basis:68px;width:68px;height:68px}.water-fixes summary{font-size:15px;gap:10px}}
+@media(prefers-reduced-motion:reduce){.brewing-page .section-nav a:hover{transform:none}}

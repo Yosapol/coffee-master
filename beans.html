@@ -1,112 +1,103 @@
 <!doctype html>
 <html lang="en">
   <head>
+<script src="theme.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coffee Master | Bean Variety</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Coffee Master home">
-        <span class="brand-mark"></span>
-        <span>Coffee Master</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a class="nav-link" href="index.html">Coffee grinder</a>
-        <a class="nav-link active" href="beans.html">Bean variety</a>
-        <a class="nav-link" href="recipes.html">Pour over</a>
-      </nav>
-    </header>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-    <main>
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="beans-visuals.css">
+  <script src="cup-data.js" defer></script><script src="site.js" defer></script><script src="cup.js" defer></script><script src="beans.js" defer></script><link rel="icon" href="assets/mood-bean.svg" type="image/svg+xml"><meta name="theme-color" content="#faf7f0">
+</head>
+  <body class="coffee-page beans-page">
+    <a class="skip-link" href="#main-content">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><nav id="main-navigation" class="main-nav" aria-label="Main navigation"><a href="index.html#finder">Find your cup</a><details class="nav-group"><summary>Brew tools</summary><div class="nav-links"><a href="grinder.html">Grinder settings</a><a href="recipes.html">Recipes</a><a href="dial-in.html">Fix my cup</a></div></details><details class="nav-group current-group"><summary>Coffee journal</summary><div class="nav-links"><a href="knowledge.html">Coffee journal</a><a href="beans.html" aria-current="page">Beans & origins</a><a href="brewing.html">Brewing methods</a><a href="water.html">Water</a><a href="equipment.html">Equipment</a><a href="thai-coffee.html">Thai coffee</a></div></details></nav><div class="header-actions"><button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Enable dark mode"><span aria-hidden="true">☾</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu <span aria-hidden="true">☰</span></button></div></header>
+
+    <main id="main-content"><div class="page-trail"><a data-context-link href="index.html">Home</a> <span aria-hidden="true"> / </span> Beans & origins</div>
       <section class="hero bean-hero">
         <div class="hero-copy">
           <p class="eyebrow">Origin library</p>
           <h1>Find a bean that fits your taste.</h1>
-          <p class="hero-text">
-            Browse origin stories, growing places, flavor profiles, and tasting notes,
-            then pair the bean with a grind style that helps it shine.
-          </p>
+          <p class="hero-text">Find an origin and flavor that sounds like you.</p>
         </div>
-        <figure class="bean-hero-image">
-          <img src="assets/coffee-bean-mosaic.svg" alt="Four styles of roasted coffee beans on a warm tabletop">
-        </figure>
+        <figure class="hero-art"><img src="assets/watercolor-beans.webp" width="1000" height="667" alt="Coffee blossoms and ripe cherries beside green and roasted coffee beans" fetchpriority="high"></figure>
       </section>
+<div id="journey-context" class="journey-context" hidden></div><nav class="section-nav" aria-label="On this page"><a href="#bean-filters">Browse beans</a></nav>
 
       <section class="bean-type-grid" aria-label="Coffee bean species overview">
         <article class="type-card">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Arabica_Coffee.jpg" alt="Arabica coffee photo">
+          <img class="type-bean-mark" src="assets/bean-types/arabica.svg" width="64" height="68" alt="One illustrative arabica coffee bean">
           <div>
-            <h2>Arabica</h2>
+            <h2 id="section-arabica">Arabica</h2>
             <p>Most specialty coffee comes from Arabica. It usually has more aroma, acidity, sweetness, and origin clarity.</p>
           </div>
         </article>
         <article class="type-card">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans_robusta.jpg" alt="Robusta coffee beans photo">
+          <img class="type-bean-mark" src="assets/bean-types/robusta.svg" width="64" height="68" alt="One illustrative robusta coffee bean">
           <div>
-            <h2>Robusta</h2>
+            <h2 id="section-robusta">Robusta</h2>
             <p>Robusta is stronger, more bitter, higher in caffeine, and prized for body and crema in espresso blends.</p>
           </div>
         </article>
         <article class="type-card">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5594972157).jpg" alt="Liberica coffee plant photo">
+          <img class="type-bean-mark" src="assets/bean-types/liberica.svg" width="64" height="68" alt="One illustrative liberica coffee bean">
           <div>
-            <h2>Liberica</h2>
+            <h2 id="section-liberica">Liberica</h2>
             <p>Liberica has large beans and a bold, unusual profile that can taste woody, smoky, fruity, and floral.</p>
           </div>
         </article>
         <article class="type-card">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5597934575).jpg" alt="Excelsa coffee plant photo">
+          <img class="type-bean-mark" src="assets/bean-types/excelsa.svg" width="64" height="68" alt="One illustrative excelsa coffee bean">
           <div>
-            <h2>Excelsa</h2>
+            <h2 id="section-excelsa">Excelsa</h2>
             <p>Excelsa is commonly treated as a Liberica variety, known for tart fruit, depth, and a distinctive finish.</p>
           </div>
         </article>
       </section>
 
-      <section class="bean-filter-panel" aria-label="Bean recommendation filters">
-        <div class="bean-filter-row">
+      <section class="bean-filter-panel" id="bean-filters" aria-label="Bean recommendation filters">
+        <p class="bean-illustration-note">Bean illustrations are examples, not to scale. Rare: Stenophylla · Hybrid: Catimor.</p>
+        <div class="bean-filter-row bean-type-row">
           <span class="filter-title">Bean type</span>
-          <div class="filter-group" role="list" aria-label="Coffee bean type filters">
-            <button class="type-button active" data-type-filter="all">All</button>
-            <button class="type-button" data-type-filter="arabica">Arabica</button>
-            <button class="type-button" data-type-filter="robusta">Robusta</button>
-            <button class="type-button" data-type-filter="liberica">Liberica</button>
-            <button class="type-button" data-type-filter="excelsa">Excelsa</button>
-            <button class="type-button" data-type-filter="rare">Rare</button>
-            <button class="type-button" data-type-filter="hybrid">Hybrid</button>
+          <div class="filter-group bean-type-controls" role="group" aria-label="Coffee bean type filters">
+            <button class="type-button active" data-type-filter="all"><img src="assets/origins/all.svg" width="28" height="30" alt=""><span>All</span></button>
+            <button class="type-button" data-type-filter="arabica"><img src="assets/bean-types/arabica.svg" width="28" height="30" alt=""><span>Arabica</span></button>
+            <button class="type-button" data-type-filter="robusta"><img src="assets/bean-types/robusta.svg" width="28" height="30" alt=""><span>Robusta</span></button>
+            <button class="type-button" data-type-filter="liberica"><img src="assets/bean-types/liberica.svg" width="28" height="30" alt=""><span>Liberica</span></button>
+            <button class="type-button" data-type-filter="excelsa"><img src="assets/bean-types/excelsa.svg" width="28" height="30" alt=""><span>Excelsa</span></button>
+            <button class="type-button" data-type-filter="rare"><img src="assets/bean-types/rare.svg" width="28" height="30" alt=""><span>Rare</span></button>
+            <button class="type-button" data-type-filter="hybrid"><img src="assets/bean-types/hybrid.svg" width="28" height="30" alt=""><span>Hybrid</span></button>
           </div>
         </div>
-        <div class="bean-filter-row">
+        <div class="bean-filter-row taste-row">
           <span class="filter-title">Taste</span>
-          <div class="filter-group" role="list" aria-label="Flavor filters">
-            <button class="filter-button active" data-filter="all">All</button>
-            <button class="filter-button" data-filter="bright">Bright</button>
-            <button class="filter-button" data-filter="sweet">Sweet</button>
-            <button class="filter-button" data-filter="bold">Bold</button>
-            <button class="filter-button" data-filter="earthy">Earthy</button>
+          <div class="filter-group taste-controls-filter" role="group" aria-label="Flavor filters">
+            <button class="filter-button active" data-filter="all"><img src="assets/origins/all.svg" width="30" height="30" alt=""><span>All</span></button>
+            <button class="filter-button" data-filter="bright"><img src="assets/flavors/lemon.svg" width="30" height="30" alt=""><span>Bright</span></button>
+            <button class="filter-button" data-filter="sweet"><img src="assets/flavors/honey.svg" width="30" height="30" alt=""><span>Sweet</span></button>
+            <button class="filter-button" data-filter="bold"><img src="assets/flavors/dark-chocolate.svg" width="30" height="30" alt=""><span>Bold</span></button>
+            <button class="filter-button" data-filter="earthy"><img src="assets/flavors/cedar.svg" width="30" height="30" alt=""><span>Earthy</span></button>
           </div>
         </div>
-      </section>
+<div class="bean-filter-row"><span class="filter-title">Flavor family</span><div id="bean-flavors" class="filter-group" role="group" aria-label="Flavor family filters"></div></div><div class="filter-summary"><span id="bean-count" role="status"></span><button id="reset-beans" class="secondary" type="button">Reset filters</button></div>      </section>
 
-      <section class="bean-grid" id="bean-list" aria-label="Coffee bean varieties">
-        <article class="bean-card" data-type="arabica" data-tags="bright sweet">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Arabica_Coffee.jpg" alt="Ethiopian heirloom Arabica coffee photo">
+      <div id="bean-empty" class="empty-state" hidden><h2 id="section-a-different-combination-perhaps">A different combination, perhaps?</h2><p>No beans match these filters. Try another flavor or reset your choices.</p><button class="secondary" id="empty-reset" type="button">Show all beans</button></div><section class="bean-grid" id="bean-list" aria-label="Coffee bean varieties">
+        <article class="bean-card" id="ethiopian-heirloom" data-flavors="floral fruity citrus" data-type="arabica" data-tags="bright sweet">
+          <div class="bean-art bean-origin-art" data-origin-codes="et"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-et.svg" width="200" height="140" alt="Country outline of Ethiopia"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-et.svg" width="24" height="18" alt=""><strong>Ethiopia</strong></span><span class="origin-place">Yirgacheffe highlands</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light roast</span>
               <span>Pour over</span>
               <span>Arabica</span>
             </div>
-            <h2>Ethiopian Heirloom</h2>
+            <h2 id="section-ethiopian-heirloom">Ethiopian Heirloom</h2>
             <p class="story">
               Born from ancient arabica forests, Ethiopian heirloom coffee carries a wild, floral identity shaped by small farms and careful drying beds.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Jasmine, bergamot, lemon zest, peach, black tea.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Yirgacheffe highlands, 1,800-2,200 meters, shade-grown garden farms.</dd>
@@ -119,23 +110,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Jasmine, bergamot, lemon zest, peach, black tea.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_De_Colombia_Listo_Para_Molienda.jpg" alt="Colombian Arabica coffee beans photo">
+        <article class="bean-card" id="colombian-caturra" data-flavors="fruity citrus sweet nutty" data-type="arabica" data-tags="sweet bright">
+          <div class="bean-art bean-origin-art" data-origin-codes="co"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-co.svg" width="200" height="140" alt="Country outline of Colombia"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-co.svg" width="24" height="18" alt=""><strong>Colombia</strong></span><span class="origin-place">Huila & Tolima</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Espresso</span>
               <span>Arabica</span>
             </div>
-            <h2>Colombian Caturra</h2>
+            <h2 id="section-colombian-caturra">Colombian Caturra</h2>
             <p class="story">
               This variety is grown on steep Andean slopes where family farms wash and ferment cherries for clarity, sweetness, and balance.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Red apple, caramel, orange peel, panela, milk chocolate.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Huila and Tolima, volcanic soil, 1,500-1,900 meters, hand-picked harvest.</dd>
@@ -148,23 +139,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Red apple, caramel, orange peel, panela, milk chocolate.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bold">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Closer_look_at_our_roasted_coffee_beans.jpg" alt="Brazilian Bourbon roasted Arabica coffee beans photo">
+        <article class="bean-card" id="brazilian-bourbon" data-flavors="fruity sweet nutty" data-type="arabica" data-tags="sweet bold">
+          <div class="bean-art bean-origin-art" data-origin-codes="br"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-br.svg" width="200" height="140" alt="Country outline of Brazil"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-br.svg" width="24" height="18" alt=""><strong>Brazil</strong></span><span class="origin-place">Cerrado Mineiro</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium-dark roast</span>
               <span>Milk drinks</span>
               <span>Arabica</span>
             </div>
-            <h2>Brazilian Bourbon</h2>
+            <h2 id="section-brazilian-bourbon">Brazilian Bourbon</h2>
             <p class="story">
               Slow sun-drying on wide patios gives Brazilian bourbon a dessert-like comfort, making it a favorite foundation for espresso blends.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Hazelnut, cocoa, brown sugar, dried cherry, toasted almond.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Cerrado Mineiro, rolling estates, dry harvest weather, 900-1,250 meters.</dd>
@@ -177,23 +168,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Hazelnut, cocoa, brown sugar, dried cherry, toasted almond.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="bold earthy">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans.jpg" alt="Sumatra roasted Arabica coffee beans photo">
+        <article class="bean-card" id="sumatra-mandheling" data-flavors="sweet nutty spiced" data-type="arabica" data-tags="bold earthy">
+          <div class="bean-art bean-origin-art" data-origin-codes="id"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-id.svg" width="200" height="140" alt="Country outline of Indonesia"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-id.svg" width="24" height="18" alt=""><strong>Indonesia</strong></span><span class="origin-place">Sumatra · Lake Toba</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Dark roast</span>
               <span>French press</span>
               <span>Arabica</span>
             </div>
-            <h2>Sumatra Mandheling</h2>
+            <h2 id="section-sumatra-mandheling">Sumatra Mandheling</h2>
             <p class="story">
               Wet-hulled processing and humid mountain farms create a dense, savory coffee with a deep character and a long, spicy finish.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Dark chocolate, cedar, baking spice, tobacco leaf, molasses.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Lake Toba region, rich volcanic land, 1,100-1,600 meters, smallholder farms.</dd>
@@ -206,23 +197,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Dark chocolate, cedar, baking spice, tobacco leaf, molasses.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="bright bold">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_look_at_roasted_and_fresh_coffee_beans.jpg" alt="Kenyan SL28 Arabica coffee beans photo">
+        <article class="bean-card" id="kenyan-sl28" data-flavors="floral fruity citrus sweet" data-type="arabica" data-tags="bright bold">
+          <div class="bean-art bean-origin-art" data-origin-codes="ke"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-ke.svg" width="200" height="140" alt="Country outline of Kenya"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-ke.svg" width="24" height="18" alt=""><strong>Kenya</strong></span><span class="origin-place">Nyeri & Kirinyaga</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light-medium roast</span>
               <span>Pour over</span>
               <span>Arabica</span>
             </div>
-            <h2>Kenyan SL28</h2>
+            <h2 id="section-kenyan-sl28">Kenyan SL28</h2>
             <p class="story">
               Selected for drought resistance and cup quality, SL28 became one of Kenya's most recognizable coffees through cooperative washing stations and meticulous sorting.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Blackcurrant, grapefruit, tomato leaf, cane sugar, hibiscus.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Nyeri and Kirinyaga, red volcanic soil, 1,600-2,000 meters.</dd>
@@ -235,23 +226,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Blackcurrant, grapefruit, tomato leaf, cane sugar, hibiscus.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bold">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Closeup_of_Coffee_Beans.jpg" alt="Guatemala Antigua Arabica coffee beans photo">
+        <article class="bean-card" id="guatemala-antigua" data-flavors="citrus sweet nutty spiced" data-type="arabica" data-tags="sweet bold">
+          <div class="bean-art bean-origin-art" data-origin-codes="gt"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-gt.svg" width="200" height="140" alt="Country outline of Guatemala"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-gt.svg" width="24" height="18" alt=""><strong>Guatemala</strong></span><span class="origin-place">Antigua valley</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Drip machine</span>
               <span>Arabica</span>
             </div>
-            <h2>Guatemala Antigua</h2>
+            <h2 id="section-guatemala-antigua">Guatemala Antigua</h2>
             <p class="story">
               Antigua coffee grows between volcanoes, where cool nights and mineral-rich soil create a steady sweetness that works beautifully as a daily cup.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Cocoa, orange, spice, brown sugar, roasted almond.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Antigua valley, Guatemala, volcanic slopes around 1,500-1,800 meters.</dd>
@@ -264,23 +255,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Cocoa, orange, spice, brown sugar, roasted almond.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_de_Costa_Rica.jpg" alt="Costa Rica Tarrazu Arabica coffee photo">
+        <article class="bean-card" id="costa-rica-tarrazu" data-flavors="floral fruity sweet" data-type="arabica" data-tags="sweet bright">
+          <div class="bean-art bean-origin-art" data-origin-codes="cr"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-cr.svg" width="200" height="140" alt="Country outline of Costa Rica"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-cr.svg" width="24" height="18" alt=""><strong>Costa Rica</strong></span><span class="origin-place">Tarrazu mountain farms</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>AeroPress</span>
               <span>Arabica</span>
             </div>
-            <h2>Costa Rica Tarrazu</h2>
+            <h2 id="section-costa-rica-tarrazu">Costa Rica Tarrazu</h2>
             <p class="story">
               Tarrazu producers are known for precise milling and honey processing, creating coffees that bridge crisp fruit and rounded sweetness.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Orange blossom, honey, green apple, vanilla, nougat.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Tarrazu, Costa Rica, mountain farms at 1,400-1,900 meters.</dd>
@@ -293,23 +284,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Orange blossom, honey, green apple, vanilla, nougat.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="bright sweet">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Roasted_Coffee_Beans_Texture.jpg" alt="Panama Geisha Arabica coffee beans photo">
+        <article class="bean-card" id="panama-geisha" data-flavors="floral fruity citrus sweet" data-type="arabica" data-tags="bright sweet">
+          <div class="bean-art bean-origin-art" data-origin-codes="pa"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-pa.svg" width="200" height="140" alt="Country outline of Panama"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-pa.svg" width="24" height="18" alt=""><strong>Panama</strong></span><span class="origin-place">Boquete highlands</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light roast</span>
               <span>Manual brew</span>
               <span>Arabica</span>
             </div>
-            <h2>Panama Geisha</h2>
+            <h2 id="section-panama-geisha">Panama Geisha</h2>
             <p class="story">
               Geisha became famous in Panama for its perfume-like aromatics and delicate structure, especially from high farms near cloud forest conditions.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Jasmine, mango, lime, bergamot, honey.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Boquete, Panama, cool highland farms around 1,600-2,000 meters.</dd>
@@ -322,23 +313,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Jasmine, mango, lime, bergamot, honey.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffe_Beans.jpg" alt="Rwanda Bourbon Arabica coffee beans photo">
+        <article class="bean-card" id="rwanda-bourbon" data-flavors="floral fruity citrus sweet spiced" data-type="arabica" data-tags="sweet bright">
+          <div class="bean-art bean-origin-art" data-origin-codes="rw"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-rw.svg" width="200" height="140" alt="Country outline of Rwanda"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-rw.svg" width="24" height="18" alt=""><strong>Rwanda</strong></span><span class="origin-place">Lake Kivu region</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light-medium roast</span>
               <span>Pour over</span>
               <span>Arabica</span>
             </div>
-            <h2>Rwanda Bourbon</h2>
+            <h2 id="section-rwanda-bourbon">Rwanda Bourbon</h2>
             <p class="story">
               Rwandan bourbon is often processed through community washing stations, giving smallholder harvests a clean and polished fruit character.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Red currant, mandarin, black tea, honey, clove.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Lake Kivu region, Rwanda, steep farms at 1,500-2,000 meters.</dd>
@@ -351,23 +342,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Red currant, mandarin, black tea, honey, clove.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="earthy sweet">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Market_Square_stall_Saffron_Walden_02.jpg" alt="Yemen Mocha Arabica coffee beans photo">
+        <article class="bean-card" id="yemen-mocha" data-flavors="fruity nutty spiced" data-type="arabica" data-tags="earthy sweet">
+          <div class="bean-art bean-origin-art" data-origin-codes="ye"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-ye.svg" width="200" height="140" alt="Country outline of Yemen"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-ye.svg" width="24" height="18" alt=""><strong>Yemen</strong></span><span class="origin-place">Haraz & Bani Matar</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Moka pot</span>
               <span>Arabica</span>
             </div>
-            <h2>Yemen Mocha</h2>
+            <h2 id="section-yemen-mocha">Yemen Mocha</h2>
             <p class="story">
               One of coffee's oldest trade identities, Yemen Mocha is shaped by terraced mountain farms, dry processing, and intensely concentrated cherries.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Cacao nib, dried fig, cardamom, raisin, red wine.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Haraz and Bani Matar, Yemen, terraced farms at 1,700-2,200 meters.</dd>
@@ -380,23 +371,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Cacao nib, dried fig, cardamom, raisin, red wine.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="earthy bold">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_tostado_en_grano_.jpg" alt="India Monsooned Malabar coffee beans photo">
+        <article class="bean-card" id="monsooned-malabar" data-flavors="sweet nutty spiced" data-type="arabica" data-tags="earthy bold">
+          <div class="bean-art bean-origin-art" data-origin-codes="in"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-in.svg" width="200" height="140" alt="Country outline of India"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-in.svg" width="24" height="18" alt=""><strong>India</strong></span><span class="origin-place">Malabar Coast</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium-dark roast</span>
               <span>Espresso</span>
               <span>Arabica</span>
             </div>
-            <h2>Monsooned Malabar</h2>
+            <h2 id="section-monsooned-malabar">Monsooned Malabar</h2>
             <p class="story">
               Exposed to humid monsoon winds after harvest, this Indian coffee becomes pale, low-acid, and unusually heavy in the cup.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Walnut, leather, cedar, malt, dark cocoa.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Malabar Coast, India, aged in open-sided warehouses during monsoon season.</dd>
@@ -409,23 +400,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Walnut, leather, cedar, malt, dark cocoa.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="arabica" data-tags="sweet bright">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_hecho_en_M%C3%A9xico.JPG" alt="Mexico Chiapas Arabica coffee beans photo">
+        <article class="bean-card" id="mexico-chiapas" data-flavors="fruity citrus sweet nutty spiced" data-type="arabica" data-tags="sweet bright">
+          <div class="bean-art bean-origin-art" data-origin-codes="mx"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-mx.svg" width="200" height="140" alt="Country outline of Mexico"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-mx.svg" width="24" height="18" alt=""><strong>Mexico</strong></span><span class="origin-place">Sierra Madre de Chiapas</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Drip machine</span>
               <span>Arabica</span>
             </div>
-            <h2>Mexico Chiapas</h2>
+            <h2 id="section-mexico-chiapas">Mexico Chiapas</h2>
             <p class="story">
               Chiapas coffees often come from small farms near forested highlands, offering a soft, approachable profile for everyday brewing.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Milk chocolate, pear, cinnamon, toasted sugar, citrus.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Sierra Madre de Chiapas, Mexico, shade-grown farms at 900-1,700 meters.</dd>
@@ -438,23 +429,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Milk chocolate, pear, cinnamon, toasted sugar, citrus.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="robusta" data-tags="bold earthy">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_beans_robusta.jpg" alt="Robusta coffee beans photo">
+        <article class="bean-card" id="vietnamese-robusta" data-flavors="sweet nutty" data-type="robusta" data-tags="bold earthy">
+          <div class="bean-art bean-origin-art" data-origin-codes="vn"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-vn.svg" width="200" height="140" alt="Country outline of Vietnam"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-vn.svg" width="24" height="18" alt=""><strong>Vietnam</strong></span><span class="origin-place">Central Highlands</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium-dark roast</span>
               <span>Espresso blend</span>
               <span>Robusta</span>
             </div>
-            <h2>Vietnamese Robusta</h2>
+            <h2 id="section-vietnamese-robusta">Vietnamese Robusta</h2>
             <p class="story">
               Robusta is central to Vietnam's coffee culture, thriving in warmer lowland farms and bringing the strong base used for phin coffee and espresso crema.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Dark chocolate, roasted peanut, molasses, malt, bitter cocoa.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Central Highlands of Vietnam, especially Dak Lak and Lam Dong, roughly 500-1,200 meters.</dd>
@@ -467,23 +458,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Dark chocolate, roasted peanut, molasses, malt, bitter cocoa.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="robusta" data-tags="bold sweet">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_robusta.jpg" alt="Robusta coffee photo">
+        <article class="bean-card" id="ugandan-robusta" data-flavors="sweet nutty spiced" data-type="robusta" data-tags="bold sweet">
+          <div class="bean-art bean-origin-art" data-origin-codes="ug"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-ug.svg" width="200" height="140" alt="Country outline of Uganda"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-ug.svg" width="24" height="18" alt=""><strong>Uganda</strong></span><span class="origin-place">Lake Victoria basin</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Dark roast</span>
               <span>Milk drinks</span>
               <span>Robusta</span>
             </div>
-            <h2>Ugandan Robusta</h2>
+            <h2 id="section-ugandan-robusta">Ugandan Robusta</h2>
             <p class="story">
               Uganda is part of Robusta's natural home, where hardy coffee trees produce dense beans that can add structure and punch to blends.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Walnut, cacao, brown sugar, black pepper, toasted grain.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Lake Victoria basin and central Uganda, warm humid farms at lower elevations.</dd>
@@ -496,23 +487,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Walnut, cacao, brown sugar, black pepper, toasted grain.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="liberica" data-tags="earthy bold">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5594972157).jpg" alt="Liberica coffee plant photo">
+        <article class="bean-card" id="philippine-barako" data-flavors="fruity sweet spiced" data-type="liberica" data-tags="earthy bold">
+          <div class="bean-art bean-origin-art" data-origin-codes="ph"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-ph.svg" width="200" height="140" alt="Country outline of Philippines"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-ph.svg" width="24" height="18" alt=""><strong>Philippines</strong></span><span class="origin-place">Batangas & Cavite</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Manual brew</span>
               <span>Liberica</span>
             </div>
-            <h2>Philippine Barako</h2>
+            <h2 id="section-philippine-barako">Philippine Barako</h2>
             <p class="story">
               Barako is a beloved Liberica identity in the Philippines, known for large beans, powerful aroma, and a taste that stands apart from typical Arabica.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Jackfruit, smoke, dark sugar, spice, toasted wood.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Batangas and Cavite, Philippines, warm farms with tall Liberica trees.</dd>
@@ -525,23 +516,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Jackfruit, smoke, dark sugar, spice, toasted wood.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="liberica" data-tags="sweet earthy">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caf%C3%A9_Lib%C3%A9ria.jpg" alt="Liberica coffee beans photo">
+        <article class="bean-card" id="malaysian-liberica" data-flavors="floral fruity sweet nutty spiced" data-type="liberica" data-tags="sweet earthy">
+          <div class="bean-art bean-origin-art" data-origin-codes="my"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-my.svg" width="200" height="140" alt="Country outline of Malaysia"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-my.svg" width="24" height="18" alt=""><strong>Malaysia</strong></span><span class="origin-place">Johor & Selangor</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>French press</span>
               <span>Liberica</span>
             </div>
-            <h2>Malaysian Liberica</h2>
+            <h2 id="section-malaysian-liberica">Malaysian Liberica</h2>
             <p class="story">
               Liberica has deep roots in Malaysia, especially in farms that value its resilience, large leaves, and unusually fragrant cup character.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Ripe banana, palm sugar, cedar, cacao, floral spice.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Johor and Selangor, Malaysia, lowland tropical farms.</dd>
@@ -554,23 +545,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Ripe banana, palm sugar, cedar, cacao, floral spice.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="excelsa" data-tags="bright earthy">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_liberica_(5597934575).jpg" alt="Excelsa coffee plant photo">
+        <article class="bean-card" id="excelsa-dewevrei" data-flavors="fruity nutty spiced" data-type="excelsa" data-tags="bright earthy">
+          <div class="bean-art bean-origin-art is-regional" data-origin-codes=""><div class="origin-map-group"><img class="origin-map regional-map" src="assets/origins/map-excelsa.svg" width="300" height="140" alt="Highlighted growing regions: Southeast Asia · Central Africa"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><strong class="origin-multiple">Multiple growing regions</strong><span class="origin-place">Southeast Asia · Central Africa</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Blend component</span>
               <span>Excelsa</span>
             </div>
-            <h2>Excelsa Dewevrei</h2>
+            <h2 id="section-excelsa-dewevrei">Excelsa Dewevrei</h2>
             <p class="story">
               Excelsa is often classified as a Liberica variety, but roasters treat it separately because it brings tart fruit and a layered finish.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Tamarind, dark berry, cocoa husk, spice, dried fruit.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Southeast Asia and parts of Central Africa, commonly grown on tall, hardy trees.</dd>
@@ -583,23 +574,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Tamarind, dark berry, cocoa husk, spice, dried fruit.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="rare" data-tags="bright sweet">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_stenophylla_kz01.jpg" alt="Stenophylla coffee plant photo">
+        <article class="bean-card" id="stenophylla" data-flavors="floral fruity citrus sweet" data-type="rare" data-tags="bright sweet">
+          <div class="bean-art bean-origin-art" data-origin-codes="sl"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-sl.svg" width="200" height="140" alt="Country outline of Sierra Leone"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-sl.svg" width="24" height="18" alt=""><strong>Sierra Leone</strong></span><span class="origin-place">Sierra Leone & neighboring West Africa</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light roast</span>
               <span>Rare tasting</span>
               <span>Stenophylla</span>
             </div>
-            <h2>Stenophylla</h2>
+            <h2 id="section-stenophylla">Stenophylla</h2>
             <p class="story">
               Stenophylla is a rare West African coffee species gaining attention for climate resilience and a cup quality that can resemble fine Arabica.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Peach, elderflower, citrus, honey, black tea.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Sierra Leone and neighboring West African regions, historically grown in warm conditions.</dd>
@@ -612,23 +603,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Peach, elderflower, citrus, honey, black tea.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="rare" data-tags="sweet earthy">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coffea_racemosa.jpg" alt="Racemosa coffee plant photo">
+        <article class="bean-card" id="racemosa" data-flavors="floral fruity citrus" data-type="rare" data-tags="sweet earthy">
+          <div class="bean-art bean-origin-art" data-origin-codes="mz za"><div class="origin-map-group"><img class="origin-map" src="assets/origins/map-mz.svg" width="200" height="140" alt="Country outline of Mozambique"><img class="origin-map" src="assets/origins/map-za.svg" width="200" height="140" alt="Country outline of South Africa"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><span class="origin-country"><img src="assets/origins/flag-mz.svg" width="24" height="18" alt=""><strong>Mozambique</strong></span><span class="origin-country"><img src="assets/origins/flag-za.svg" width="24" height="18" alt=""><strong>South Africa</strong></span><span class="origin-place">Coastal forest environments</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Light-medium roast</span>
               <span>Experimental brew</span>
               <span>Racemosa</span>
             </div>
-            <h2>Racemosa</h2>
+            <h2 id="section-racemosa">Racemosa</h2>
             <p class="story">
               Racemosa is a low-caffeine wild coffee species from southern Africa, more often seen in research and specialty experiments than everyday cafes.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Herbs, raisin, tea, soft citrus, toasted grain.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Mozambique and South Africa, dry coastal forest environments.</dd>
@@ -641,23 +632,23 @@
                 <dt>Origin taste notes</dt>
                 <dd>Herbs, raisin, tea, soft citrus, toasted grain.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
 
-        <article class="bean-card" data-type="hybrid" data-tags="sweet bright">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/15_grams_of_coffee_roasted_to_different_degrees.jpg" alt="Hybrid coffee beans roasted to different degrees photo">
+        <article class="bean-card" id="catimor-hybrid" data-flavors="citrus sweet nutty" data-type="hybrid" data-tags="sweet bright">
+          <div class="bean-art bean-origin-art is-regional" data-origin-codes=""><div class="origin-map-group"><img class="origin-map regional-map" src="assets/origins/map-catimor.svg" width="300" height="140" alt="Highlighted growing regions: Southeast Asia · Latin America"></div><div class="origin-caption"><span class="origin-eyebrow">GROWING ORIGIN</span><strong class="origin-multiple">Multiple growing regions</strong><span class="origin-place">Southeast Asia · Latin America</span></div></div>
           <div class="bean-card-body">
             <div class="bean-meta">
               <span>Medium roast</span>
               <span>Filter or espresso</span>
               <span>Hybrid</span>
             </div>
-            <h2>Catimor Hybrid</h2>
+            <h2 id="section-catimor-hybrid">Catimor Hybrid</h2>
             <p class="story">
               Catimor families combine Arabica cup potential with Robusta-related disease resistance, making them important in farms facing leaf rust pressure.
             </p>
-            <dl>
+            <p class="bean-notes"><strong>Tasting notes</strong><br>Chocolate, citrus, brown sugar, mild herbs, roasted nuts.</p><details><summary>Origin & growing details</summary><dl>
               <div>
                 <dt>Agriculture place</dt>
                 <dd>Common in Southeast Asia and Latin America, especially humid farms needing stronger disease resistance.</dd>
@@ -670,12 +661,13 @@
                 <dt>Origin taste notes</dt>
                 <dd>Chocolate, citrus, brown sugar, mild herbs, roasted nuts.</dd>
               </div>
-            </dl>
+            </dl></details>
           </div>
         </article>
       </section>
-    </main>
+    <section class="next-steps" aria-label="Continue your coffee journey"><p class="eyebrow">YOUR NEXT LITTLE STEP</p><h2 id="section-keep-making-it-your-own">Found a bean you like?</h2><p>Choose a brewing method, then find a setting for your grinder.</p><div class="next-actions"><a class="button" data-context-link href="brewing.html">Choose a brewing method ↗</a><a class="button" data-context-link href="grinder.html">Find a starting setting ↗</a></div></section></main>
 
-    <script src="script.js"></script>
-  </body>
+
+  <footer class="site-footer wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><p>A little more feeling in every cup.</p><a class="text-link" href="knowledge.html">Keep exploring coffee ↗</a></footer>
+</body>
 </html>

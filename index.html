@@ -1,155 +1,73 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coffee Master | Grind Size Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Coffee Master home">
-        <span class="brand-mark"></span>
-        <span>Coffee Master</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a class="nav-link active" href="index.html">Coffee grinder</a>
-        <a class="nav-link" href="beans.html">Bean variety</a>
-        <a class="nav-link" href="recipes.html">Pour over</a>
-      </nav>
-    </header>
+<head>
+<script src="theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7f0">
+  <meta name="description" content="Find a coffee for the way you feel. Explore a pastel flavor wheel, discover a thoughtful bean pairing, or let a little surprise choose your next cup.">
+  <title>Coffee Master — A little mood. A lovely cup.</title>
+  <link rel="icon" href="assets/mood-bean.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="mood.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="flavors.css">
 
-    <main>
-      <section class="hero grind-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Barista workflow</p>
-          <h1>Match grind size to the way you brew.</h1>
-          <p class="hero-text">
-            Dial in a better cup by choosing your brew method, tasting the result,
-            and making one clear grind adjustment at a time.
-          </p>
+<script src="cup-data.js" defer></script><script src="site.js" defer></script><script src="cup.js" defer></script><script src="flavor-notes.js" defer></script><script src="mood.js" defer></script><script src="flavor-explorer.js" defer></script>
+</head>
+<body class="mood-home">
+  <a class="skip-link" href="#finder">Skip to coffee finder</a>
+  <header class="site-header wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><nav id="main-navigation" class="main-nav" aria-label="Main navigation"><a href="index.html#finder" aria-current="page">Find your cup</a><details class="nav-group"><summary>Brew tools</summary><div class="nav-links"><a href="grinder.html">Grinder settings</a><a href="recipes.html">Recipes</a><a href="dial-in.html">Fix my cup</a></div></details><details class="nav-group"><summary>Coffee journal</summary><div class="nav-links"><a href="knowledge.html">Coffee journal</a><a href="beans.html">Beans & origins</a><a href="brewing.html">Brewing methods</a><a href="water.html">Water</a><a href="equipment.html">Equipment</a><a href="thai-coffee.html">Thai coffee</a></div></details></nav><div class="header-actions"><button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Enable dark mode"><span aria-hidden="true">☾</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu <span aria-hidden="true">☰</span></button></div></header>
+  <main id="main-content">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> GOOD COFFEE MEETS YOU WHERE YOU ARE</p>
+        <h1 id="hero-title">A little mood.<br>A <em>lovely cup.</em></h1>
+        <p>Some days need a cozy hug. Others, a little adventure.<br class="desktop-break"> Find the coffee that feels like you, today.</p>
+        <a class="button primary" href="#finder">Let’s find your cup <span aria-hidden="true">↗</span></a>
+        <div class="hero-footnote"><span aria-hidden="true">♡</span> Your beans. Your brewer. Your little moment.</div>
+      </div>
+      <div class="hero-art"><img src="assets/coffee-watercolor.webp" width="1152" height="768" fetchpriority="high" alt="Watercolor of a sage coffee cup, a pink dripper and glass server, with coffee cherries and scattered beans."><span class="art-note">a slower sip, a softer day</span></div>
+    </section>
+    <nav class="quick-tools wrap" aria-label="Everyday coffee tools"><a class="quick-tool" data-context-link href="grinder.html"><span aria-hidden="true">◎</span><strong>Grinder settings ↗</strong><small>Find your starting point</small></a><a class="quick-tool" data-context-link href="recipes.html"><span aria-hidden="true">♧</span><strong>Recipes ↗</strong><small>A little brewing inspiration</small></a><a class="quick-tool" data-context-link href="dial-in.html"><span aria-hidden="true">☼</span><strong>Fix my cup ↗</strong><small>Let your taste guide you</small></a></nav>
+<section id="finder" class="finder wrap" aria-labelledby="finder-title">
+      <div class="section-heading"><p class="eyebrow">YOUR DAILY COFFEE RITUAL</p><h2 id="finder-title">How’s your world feeling?</h2><p>There’s no wrong answer. Start with a feeling, or leave it to chance.</p></div>
+      <div id="journey-context" class="journey-context" hidden></div><div id="moods" class="mood-grid" role="group" aria-label="Choose your mood"></div>
+      <button id="surprise" class="surprise" type="button"><span aria-hidden="true">✧</span> Not sure? Surprise me <span aria-hidden="true">↗</span></button>
+      <div class="discovery">
+        <div class="wheel-panel">
+          <div class="panel-heading"><span class="step">01</span><div><h3>Follow your flavor</h3><p>Six families. Sixty little flavor adventures.</p></div></div>
+          <div class="wheel-container"><svg id="flavor-wheel" viewBox="0 0 500 500" role="group" aria-label="Interactive coffee flavor wheel. Choose a flavor family." aria-describedby="wheel-help"></svg><button id="wheel-surprise" class="wheel-center" type="button" aria-label="Surprise me with a random coffee"><span class="center-default" aria-hidden="true"><img src="assets/mood-bean.svg" width="27" height="33" alt=""><span>A WORLD<br>IN YOUR CUP</span></span><span class="center-action" aria-hidden="true"><span class="center-sparkle">✧</span><span>Surprise me</span></span></button></div>
+          <p id="wheel-help" class="wheel-help">Choose a family inside. Hover, focus, or tap a pictured note outside.</p>
+          <div id="flavor-key" class="flavor-key" role="group" aria-label="Flavor choices"></div>
+          <section class="flavor-browser" aria-labelledby="flavor-browse-heading">
+            <div class="flavor-browse-heading"><h4 id="flavor-browse-heading">Find your favorite note</h4><span id="flavor-count" aria-live="polite"></span></div>
+            <div class="flavor-search-row"><label for="flavor-search">Search all 60 flavors<input type="search" id="flavor-search" placeholder="Try peach, cocoa, jasmine…" autocomplete="off"></label><button type="button" id="flavor-show-all" class="secondary">Show all 60</button></div>
+            <div id="flavor-gallery" class="flavor-gallery" role="group" aria-label="Individual tasting notes"></div>
+            <p class="flavor-gallery-hint">Scroll for more pictures. Select a note to make it yours.</p>
+            <p id="flavor-empty" hidden>No flavors match that search. <button type="button" id="flavor-search-reset">Clear search</button></p>
+          </section>
         </div>
-        <div class="hero-visual" aria-label="Coffee grind texture illustration">
-          <div class="grind-ring">
-            <span class="particle p1"></span>
-            <span class="particle p2"></span>
-            <span class="particle p3"></span>
-            <span class="particle p4"></span>
-            <span class="particle p5"></span>
-            <span class="particle p6"></span>
-          </div>
+        <div class="discovery-sidebar">
+          <section id="flavor-detail" class="flavor-detail" aria-labelledby="flavor-detail-title"></section>
+        <section class="result-panel" aria-labelledby="result-heading" aria-live="polite" aria-atomic="true">
+          <div class="panel-heading"><span class="step">02</span><div><h3 id="result-heading">Meet your coffee moment</h3><p id="result-context">A thoughtful pairing, just for today.</p></div></div>
+          <article id="coffee-result" class="coffee-result"></article>
+        </section>
         </div>
-      </section>
+      </div>
+      <p class="honest-note">A little intuition, a lot of flavor. These are creative pairings, not promises to change your mood.<br>Tasting notes are flavor associations, not added ingredients. Each farm, roast, and bag is different.</p>
+      <noscript><p class="no-script">Turn on JavaScript to explore the wheel. For a cozy starting point, look for medium-roast beans with chocolate and hazelnut notes: their familiar flavors pair with a quiet coffee break. You can also explore the <a data-context-link href="beans.html">bean guide</a>.</p></noscript>
+    </section>
+    <section id="how-it-works" class="ritual wrap" aria-labelledby="ritual-title">
+      <div class="section-heading"><p class="eyebrow">LESS OVERTHINKING. MORE ENJOYING.</p><h2 id="ritual-title">A good cup starts with you.</h2></div>
+      <div class="ritual-grid"><article><span class="ritual-icon" aria-hidden="true">✿</span><h3>Meet the beans</h3><p>Compare origins and tasting notes once a flavor catches your eye.</p><a class="text-link" data-context-link href="beans.html">Explore beans ↗</a></article><article><span class="ritual-icon" aria-hidden="true">♧</span><h3>Choose how to brew</h3><p>Find a method that suits your equipment, time, and preferred cup.</p><a class="text-link" data-context-link href="brewing.html">Compare brewing methods ↗</a></article><article><span class="ritual-icon" aria-hidden="true">☼</span><h3>Make the next cup better</h3><p>Use what you taste to choose one useful adjustment.</p><a class="text-link" data-context-link href="dial-in.html">Fix my cup ↗</a></article></div>
+      <details><summary>A note about the wheel & our pairings</summary><p>This is our own simplified discovery wheel, built for everyday coffee drinkers. The mood pairings are editorial choices: familiar cocoa for cozy moments, floral notes for a gentle pause, citrus for a bright moment, fruit for curiosity, caramel for focus, and spice for a bold mood. Your preferences always come first.</p><p>Flavor vocabulary is informed by the <a href="https://worldcoffeeresearch.org/resources/sensory-lexicon" target="_blank" rel="noopener noreferrer">World Coffee Research Sensory Lexicon</a>. For a professional tasting reference, explore the <a href="https://sca.coffee/sca-news/how-to-use-the-flavor-wheel-in-eight-steps-ab2hy" target="_blank" rel="noopener noreferrer">SCA Coffee Taster’s Flavor Wheel</a>. Our wheel is an independent, simplified design.</p></details>
+    </section>
+  </main>
 
-      <section class="tool-section" id="converter">
-        <div class="section-heading">
-          <p class="eyebrow">Grinder converter</p>
-          <h2>Convert grinder settings and match them to your brew.</h2>
-        </div>
-
-        <div class="panel converter-panel">
-          <h2>Converter</h2>
-          <div class="grid converter-grid">
-            <div class="converter-box">
-              <label for="f">From grinder</label>
-              <select id="f" onchange="syncSettingInput()"></select>
-            </div>
-            <div class="converter-box">
-              <label for="s">Setting</label>
-              <input id="s" type="number" step="0.1" value="5.5" oninput="calc()">
-              <div id="settingHelp" class="hint"></div>
-            </div>
-            <div class="converter-box">
-              <label for="t">To grinder</label>
-              <select id="t" onchange="calc()"></select>
-            </div>
-            <div class="converter-box live-result">
-              <span class="sub converter-label">To setting</span>
-              <strong id="toSetting">--</strong>
-              <span id="toSettingNote" class="hint"></span>
-            </div>
-          </div>
-          <div class="visuals">
-            <div class="grinder-card">
-              <img id="fromImg" alt="">
-              <div>
-                <div class="sub">From</div>
-                <div id="fromName" class="grinder-name"></div>
-                <div id="fromMeta" class="hint"></div>
-                <div id="fromInfo" class="facts"></div>
-              </div>
-            </div>
-            <div class="grinder-card">
-              <img id="toImg" alt="">
-              <div>
-                <div class="sub">To</div>
-                <div id="toName" class="grinder-name"></div>
-                <div id="toMeta" class="hint"></div>
-                <div id="toInfo" class="facts"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          <div class="panel converter-panel">
-            <h2>Roast-aware grind suggestion</h2>
-            <p class="comparison-note">Grinder numbers are brand-specific. Use the target grinder's published starting point, then adjust by taste; this page does not pretend dial numbers are universal.</p>
-          <div class="grid roast-grid">
-            <div>
-              <label for="roast">Roast type</label>
-              <select id="roast" onchange="calc()">
-                <option value="light">Light roast</option>
-                <option value="medium" selected>Medium roast</option>
-                <option value="dark">Dark roast</option>
-              </select>
-            </div>
-            <div>
-              <label for="brew">Brew method</label>
-              <select id="brew" onchange="calc()">
-                <option value="espresso">Espresso</option>
-                <option value="moka">Moka pot</option>
-                <option value="aeropress">AeroPress</option>
-                <option value="pourover" selected>Pour over</option>
-                <option value="drip">Drip machine</option>
-                <option value="frenchpress">French press</option>
-                <option value="coldbrew">Cold brew</option>
-              </select>
-            </div>
-          </div>
-          <div class="result">
-            <div class="metric">
-              <span class="sub">Current grinder setting</span>
-              <span class="big" id="micron">--</span>
-              <div id="targetLine" class="sub"></div>
-            </div>
-            <div class="metric">
-              <span class="sub">Brew texture</span>
-              <span class="big" id="suggestion">--</span>
-              <div id="suggestionText" class="sub"></div>
-            </div>
-          </div>
-          <div id="status" class="status"></div>
-          <div class="chips" id="quickRanges"></div>
-        </div>
-
-          <div class="panel converter-panel">
-          <h2>Starting points</h2>
-          <p class="comparison-note">Official settings are preferred. Internet estimates are marked as caution references and may vary with calibration, burrs, and coffee.</p>
-          <p class="source-line">Official guides: <a href="https://fellowproducts.com/blogs/brew-talks/fellows-take-on-pb-j-by-brandywine-and-black-white" target="_blank" rel="noopener">Fellow</a>, <a href="https://comandantegrinder.com/pages/faq" target="_blank" rel="noopener">Comandante</a>, <a href="https://1zpresso.coffee/how-to-dial-in-the-perfect-grind-size-for-pour-over-coffee/" target="_blank" rel="noopener">1Zpresso</a>, <a href="https://www.kingrinder.com/_blog" target="_blank" rel="noopener">KINGrinder</a>, and <a href="https://www.baratza.com/en-us/blog/brew-guides/hario-v60-brew-guide" target="_blank" rel="noopener">Baratza</a>. Estimated fallbacks use linked online guides such as <a href="https://honestcoffeeguide.com/" target="_blank" rel="noopener">Honest Coffee Guide</a>.</p>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Grinder</th><th>Starting point</th><th>Scale</th></tr></thead>
-              <tbody id="tb"></tbody>
-            </table>
-          </div>
-          <button id="toggleMore" class="secondary table-toggle" onclick="toggleOtherGrinders()">Show other grinders</button>
-        </div>
-      </section>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
+<footer class="site-footer wrap"><a class="brand" href="index.html" aria-label="Coffee Master home"><img src="assets/mood-bean.svg" width="32" height="39" alt=""><span>Coffee Master<small>A CUP FOR EVERY FEELING</small></span></a><p>A little more feeling in every cup.</p><a class="text-link" href="knowledge.html">Keep exploring coffee ↗</a></footer>
+</body>
 </html>

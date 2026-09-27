@@ -1,0 +1,11 @@
+node_modules/
+tests/screenshots/
+*.log
+.gh-auth-*
+preview-*.png
+Coffee website backup/
+github-copy/
+publish-repo/
+.agents/
+assets/**/sources.json
+.DS_Store

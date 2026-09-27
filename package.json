@@ -1,0 +1,16 @@
+{
+  "name": "coffee-master",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An illustrated coffee discovery and home-brewing companion",
+  "scripts": {
+    "preview": "node scripts/serve.cjs",
+    "test": "node scripts/test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

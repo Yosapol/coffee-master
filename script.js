@@ -1,5 +1,5 @@
-﻿const grinders={
-  "Fellow Ode Gen 2":{min:1,max:10,step:0.1,u:"dial",note:"Filter-focused grinder; Fellow says it is not intended for espresso."},
+const grinders={
+  "Fellow Ode Gen 2":{min:1,max:11,step:1/3,decimals:2,u:"dial",note:"11 numbered settings with two tick marks between numbers (31 steps total). Fellow says it is not intended for espresso."},
   "Fellow Opus":{min:1,max:11,step:0.25,u:"outer dial",note:"Outer ring is 1-11 with quarter-step marks; inner ring is not modeled."},
   "KINGrinder K6":{min:0,max:240,step:1,u:"clicks",note:"Clicks from burr touch / zero."},
   "KINGrinder K4":{min:0,max:240,step:1,u:"clicks",note:"Clicks from burr touch / zero."},
@@ -7,7 +7,7 @@
   "Comandante C40 MK4 Red Clix":{min:0,max:120,step:1,u:"clicks",type:"woodHand",color:"#bf743b",note:"C40 MK4 with Red Clix axle upgrade. It doubles the click resolution, so roughly 2 Red Clix clicks equal 1 standard C40 click.",info:["Red Clix axle","24 clicks/turn","Finer espresso control","C40 compatible"]},
   "Comandante C60 Baracuda":{min:0,max:90,step:1,u:"clicks",type:"metalHand",color:"#4a4d50",note:"Clicks from zero; C60 uses finer adjustment than C40."},
   "Mischeif / Mischief M40":{min:0,max:120,step:1,u:"clicks",type:"woodHand",color:"#7c4a30",note:"Mischief/MisChief Workshop M40, modeled like a Red Clix-style hand grinder."},
-  "Timemore Chestnut C3":{min:6,max:34,step:1,u:"clicks",note:"Clicks from closed; avoid grinding at true zero."},
+  "Timemore Chestnut C3":{min:5,max:34,step:1,u:"clicks",note:"Clicks from closed; avoid grinding at true zero."},
   "Timemore Chestnut S3":{min:0,max:10,step:0.1,u:"dial",note:"Numbered external dial."},
   "1Zpresso K-Ultra":{min:0,max:150,step:1,u:"clicks",note:"100 clicks per rotation; about 1.5 rotations total."},
   "1Zpresso ZP6 Special":{min:0,max:100,step:1,u:"clicks",note:"90 clicks per rotation; filter-focused practical range."},
@@ -35,20 +35,37 @@ const brewProfiles={
   coldbrew:{label:"Coarse",note:"Coarse is a common starting texture for long immersion."}
 };
 
+const inferredBrewBands={
+  espresso:[0.05,0.17],
+  moka:[0.16,0.30],
+  aeropress:[0.27,0.43],
+  pourover:[0.38,0.55],
+  drip:[0.47,0.64],
+  frenchpress:[0.66,0.82],
+  coldbrew:[0.82,0.95]
+};
+
 const roastNotes={
   light:"Light roasts often need more extraction; if the cup tastes sharp or thin, try a finer setting.",
   medium:"Medium roast is a neutral starting point; let taste and brew time guide the next move.",
   dark:"Dark roasts extract readily; if the cup tastes bitter or dry, try a coarser setting."
 };
 
-// Official guides are preferred; clearly marked internet estimates fill missing models.
+// Starting points combine manufacturer references, community reports, and cautious estimates.
 const grinderGuides={
   "Fellow Ode Gen 2":{
     official:true,
     source:"Fellow",
     sourceUrl:"https://help.fellowproducts.com/hc/en-us/articles/29101533994267-How-should-I-dial-in-my-grinder-when-brewing-with-Aiden-Getting-Started-With-Aiden-Pt-3",
     methods:{
-      pourover:{display:"3-4.1 dial",range:[3,4.1]},
+      pourover:{
+        display:"4-6 dial (community range; start near 5)",
+        range:[4,6],
+        official:false,
+        community:true,
+        source:"r/pourover community thread",
+        sourceUrl:"https://www.reddit.com/r/pourover/comments/1m8fj2c/fellow_ode_2_whats_your_recipe_and_grind_setting/"
+      },
       drip:{display:"5.33, 8, or 10 dial",start:5.33},
       coldbrew:{display:"8 dial (small batch) or 10 dial (large batch)",start:8}
     }
@@ -58,7 +75,7 @@ const grinderGuides={
     source:"Fellow",
     sourceUrl:"https://fellowproducts.com/blogs/brew-talks/fellows-take-on-pb-j-by-brandywine-and-black-white",
     methods:{
-      pourover:{display:"4-5.1 dial (inner ring 0)",range:[4,5.1]},
+      pourover:{display:"6.5-9 dial (community range)",range:[6.5,9],official:false,community:true,source:"r/pourover Opus owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/16ptzi0/fellow_opus_settings/"},
       drip:{display:"6.5, 8, or 10.5 dial",start:6.5},
       coldbrew:{display:"8 dial (small batch) or 10.5 dial (large batch)",start:8}
     }
@@ -69,9 +86,9 @@ const grinderGuides={
     sourceUrl:"https://www.kingrinder.com/_blog",
     methods:{
       espresso:{display:"40 clicks",start:40},
-      moka:{display:"60-70 clicks"},
-      aeropress:{display:"60-70 clicks"},
-      pourover:{display:"100 clicks",start:100},
+      moka:{display:"60-70 clicks",range:[60,70]},
+      aeropress:{display:"60-70 clicks",range:[60,70]},
+      pourover:{display:"85-100 clicks (community range)",range:[85,100],official:false,community:true,source:"r/pourover K6 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/wkq1vu/kingrinder_k6_grind_settings/"},
       frenchpress:{display:"120 clicks",start:120}
     }
   },
@@ -82,7 +99,7 @@ const grinderGuides={
     methods:{
       espresso:{display:"7-13 clicks",range:[7,13]},
       moka:{display:"14-20 clicks",range:[14,20]},
-      pourover:{display:"18-35 clicks",range:[18,35]},
+      pourover:{display:"16-35 clicks (community range)",range:[16,35],official:false,community:true,source:"r/pourover C40 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/uz1iab/comandante_c40_mk3_vs_mk4_clicks/"},
       frenchpress:{display:"25-35 clicks",range:[25,35]}
     }
   },
@@ -90,19 +107,19 @@ const grinderGuides={
     official:true,
     source:"1Zpresso",
     sourceUrl:"https://1zpresso.coffee/how-to-dial-in-the-perfect-grind-size-for-pour-over-coffee/",
-    methods:{pourover:{display:"80-90 clicks",range:[80,90]}}
+    methods:{pourover:{display:"60-85 clicks (community range)",range:[60,85],official:false,community:true,source:"r/pourover K-Ultra owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/1d7lao4/for_those_who_use_the_k_ultra_what_are_your_grind/"}}
   },
   "1Zpresso ZP6 Special":{
     official:true,
     source:"1Zpresso",
     sourceUrl:"https://1zpresso.coffee/how-to-dial-in-the-perfect-grind-size-for-pour-over-coffee/",
-    methods:{pourover:{display:"40-50 clicks",range:[40,50]}}
+    methods:{pourover:{display:"45-60 clicks (community range)",range:[45,60],official:false,community:true,source:"r/pourover ZP6 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/142mbpw/help_with_zp6_special/"}}
   },
   "Baratza Encore":{
     official:true,
     source:"Baratza",
     sourceUrl:"https://www.baratza.com/en-us/blog/brew-guides/hario-v60-brew-guide",
-    methods:{pourover:{display:"23 setting (V60)",start:23},aeropress:{display:"12 setting",start:12}}
+    methods:{pourover:{display:"12-20 setting (community range)",range:[12,20],official:false,community:true,source:"r/pourover Encore owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/166e19x/encore_grind_size/"},aeropress:{display:"12 setting",start:12}}
   },
   "Baratza Encore ESP":{
     official:true,
@@ -111,7 +128,7 @@ const grinderGuides={
     methods:{
       espresso:{display:"1-20 setting",range:[1,20]},
       aeropress:{display:"22 setting",start:22},
-      pourover:{display:"25 setting (V60)",start:25},
+      pourover:{display:"22-28 setting (community range)",range:[22,28],official:false,community:true,source:"r/pourover Encore ESP owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/1aitxpp/grind_settings_on_encore_esp/"},
       frenchpress:{display:"21-40 setting",range:[21,40]},
       coldbrew:{display:"21-40 setting",range:[21,40]}
     }
@@ -120,7 +137,7 @@ const grinderGuides={
     official:true,
     source:"Baratza",
     sourceUrl:"https://www.baratza.com/en-us/blog/brew-guides/hario-v60-brew-guide",
-    methods:{pourover:{display:"23 setting (V60)",start:23},aeropress:{display:"12 setting",start:12}}
+    methods:{pourover:{display:"17-23 setting (community range)",range:[17,23],official:false,community:true,source:"r/pourover Virtuoso+ owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/meqx7w/virtuoso_grind_settings_for_the_james/"},aeropress:{display:"12 setting",start:12}}
   },
   "KINGrinder K4":{
     official:false,
@@ -130,7 +147,7 @@ const grinderGuides={
       espresso:{display:"50-60 clicks",range:[50,60]},
       moka:{display:"60-90 clicks",range:[60,90]},
       aeropress:{display:"60-90 clicks",range:[60,90]},
-      pourover:{display:"80-100 clicks",range:[80,100]},
+      pourover:{display:"90-110 clicks (community range)",range:[90,110],community:true,source:"Reddit K4 owner comparison",sourceUrl:"https://www.reddit.com/r/espresso/comments/15n5yw4/ive_used_both_kingrinders_k4_and_k6_for_the_last/"},
       drip:{display:"90-120 clicks",range:[90,120]},
       frenchpress:{display:"140 clicks",start:140},
       coldbrew:{display:"150 clicks",start:150}
@@ -172,7 +189,7 @@ const grinderGuides={
       espresso:{display:"10-18 clicks",range:[10,18]},
       moka:{display:"20-30 clicks",range:[20,30]},
       aeropress:{display:"24-34 clicks",range:[24,34]},
-      pourover:{display:"30-40 clicks",range:[30,40]},
+      pourover:{display:"30-50 clicks (community range)",range:[30,50],community:true,source:"r/CoffeePH M40 owners",sourceUrl:"https://www.reddit.com/r/CoffeePH/comments/1pqfndh/mischief_m40/"},
       drip:{display:"32-45 clicks",range:[32,45]},
       frenchpress:{display:"45-55 clicks",range:[45,55]},
       coldbrew:{display:"55-70 clicks",range:[55,70]}
@@ -186,7 +203,7 @@ const grinderGuides={
       espresso:{display:"5-10 clicks",range:[5,10]},
       moka:{display:"10-14 clicks",range:[10,14]},
       aeropress:{display:"13-15 clicks",range:[13,15]},
-      pourover:{display:"14-20 clicks",range:[14,20]},
+      pourover:{display:"14-24 clicks (community range)",range:[14,24],community:true,source:"r/pourover C3 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/ytbdl1/v60_timemore_c3_click_for_46_method/"},
       drip:{display:"17-20 clicks",range:[17,20]},
       frenchpress:{display:"22-24 clicks",range:[22,24]},
       coldbrew:{display:"25-27 clicks",range:[25,27]}
@@ -200,7 +217,7 @@ const grinderGuides={
       espresso:{display:"0-1.0 dial",range:[0,1]},
       moka:{display:"0.5-2.0 dial",range:[0.5,2]},
       aeropress:{display:"2-5 dial",range:[2,5]},
-      pourover:{display:"5-8 dial",range:[5,8]},
+      pourover:{display:"5-6.5 dial (community range)",range:[5,6.5],community:true,source:"r/pourover S3 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/1ujqsye/grind_settings_with_timemore_s3/"},
       drip:{display:"5-8 dial",range:[5,8]},
       frenchpress:{display:"8-9 dial",range:[8,9]},
       coldbrew:{display:"9-10 dial",range:[9,10]}
@@ -228,7 +245,7 @@ const grinderGuides={
       espresso:{display:"0-20 dial",range:[0,20]},
       moka:{display:"19-49 dial",range:[19,49]},
       aeropress:{display:"15-80 dial",range:[15,80]},
-      pourover:{display:"24-77 dial",range:[24,77]},
+      pourover:{display:"45-75 dial (community range)",range:[45,75],community:true,source:"Reddit DF64 Gen 2 owners",sourceUrl:"https://www.reddit.com/r/DF64/comments/18zeu7q/df64_gen_2_pour_over_grind_setting/"},
       drip:{display:"13-74 dial",range:[13,74]},
       frenchpress:{display:"53-90 dial",range:[53,90]},
       coldbrew:{display:"65-90 dial",range:[65,90]}
@@ -242,7 +259,7 @@ const grinderGuides={
       espresso:{display:"0-10 clicks",range:[0,10]},
       moka:{display:"0-10 clicks",range:[0,10]},
       aeropress:{display:"12-20 clicks",range:[12,20]},
-      pourover:{display:"18-25 clicks",range:[18,25]},
+      pourover:{display:"90-95 clicks (community range)",range:[90,95],community:true,source:"r/pourover Blade R3 owners",sourceUrl:"https://www.reddit.com/r/pourover/comments/1i2kzmo/mhw3bomber_blader3_an_unbiased_review/"},
       drip:{display:"18-25 clicks",range:[18,25]},
       frenchpress:{display:"25-30 clicks",range:[25,30]},
       coldbrew:{display:"30-35 clicks",range:[30,35]}
@@ -280,23 +297,130 @@ function clamp(v,min,max){
   return Math.min(max,Math.max(min,v));
 }
 
+function guideMeta(g,brew){
+  let guideSet=grinderGuides[g];
+  let explicit=guideSet?.methods?.[brew];
+  if(explicit){
+    return {
+      guide:explicit,
+      official:explicit.official===undefined?guideSet.official===true:explicit.official===true,
+      inferred:false,
+      community:explicit.community===true,
+      source:explicit.source||guideSet.source,
+      sourceUrl:explicit.sourceUrl||guideSet.sourceUrl||null
+    };
+  }
+
+  let d=grinders[g];
+  let band=inferredBrewBands[brew]||inferredBrewBands.pourover;
+  let low=roundToGrinderStep(g,d.min+(band[0]*(d.max-d.min)));
+  let high=roundToGrinderStep(g,d.min+(band[1]*(d.max-d.min)));
+  return {
+    guide:{
+      display:`${formatNumber(g,low)}-${formatNumber(g,high)} ${d.u}`,
+      range:[Math.min(low,high),Math.max(low,high)],
+      inferred:true
+    },
+    official:false,
+    inferred:true,
+    community:false,
+    source:"Common brew-range inference",
+    sourceUrl:null
+  };
+}
+
 function getGuide(g,brew){
-  return grinderGuides[g]?.methods?.[brew]||null;
+  return guideMeta(g,brew).guide;
 }
 
 function guideText(g,brew){
-  let guide=getGuide(g,brew);
-  return guide?`${guide.display} (${grinderGuides[g].source})`:"No starting point in this reference set";
+  let meta=guideMeta(g,brew);
+  return `${meta.guide.display} (${meta.source})`;
 }
 
-function isOfficialGuide(g){
-  return grinderGuides[g]?.official===true;
+function isOfficialGuide(g,brew){
+  return guideMeta(g,brew).official;
+}
+
+function stepDecimals(step){
+  let text=String(step);
+  if(text.includes("e-")) return parseInt(text.split("e-")[1],10);
+  return (text.split(".")[1]||"").length;
+}
+
+function roundToGrinderStep(g,v){
+  let d=grinders[g];
+  let steps=Math.round((clamp(v,d.min,d.max)-d.min)/d.step);
+  return clamp(d.min+(steps*d.step),d.min,d.max);
+}
+
+function formatNumber(g,v){
+  let d=grinders[g];
+  return roundToGrinderStep(g,v).toFixed(d.decimals??stepDecimals(d.step));
 }
 
 function formatValue(g,v){
   let d=grinders[g];
-  let decimals=d.step<1?1:0;
-  return `${v.toFixed(decimals)} ${d.u}`;
+  return `${formatNumber(g,v)} ${d.u}`;
+}
+
+function guideCenter(g,brew){
+  let guide=getGuide(g,brew);
+  if(guide.range) return (guide.range[0]+guide.range[1])/2;
+  if(guide.start!==undefined) return guide.start;
+  return (grinders[g].min+grinders[g].max)/2;
+}
+
+function recommendedBounds(g,brew){
+  let guide=getGuide(g,brew);
+  let d=grinders[g];
+  if(guide.range){
+    return [
+      roundToGrinderStep(g,Math.min(...guide.range)),
+      roundToGrinderStep(g,Math.max(...guide.range))
+    ];
+  }
+  if(guide.start!==undefined){
+    let tolerance=Math.max(d.step*2,(d.max-d.min)*0.04);
+    return [
+      roundToGrinderStep(g,guide.start-tolerance),
+      roundToGrinderStep(g,guide.start+tolerance)
+    ];
+  }
+  return null;
+}
+
+function convertSetting(fromName,toName,setting,brew,roast){
+  let fromData=grinders[fromName];
+  let toData=grinders[toName];
+  let sourceRange=fromData.max-fromData.min;
+  let position=sourceRange===0?0:clamp((setting-fromData.min)/sourceRange,0,1);
+  let targetRange=toData.max-toData.min;
+  let mapped=toData.min+(position*targetRange);
+  let sourceGuidePosition=sourceRange===0?0.5:clamp((guideCenter(fromName,brew)-fromData.min)/sourceRange,0,1);
+  let mappedSourceGuide=toData.min+(sourceGuidePosition*targetRange);
+  let guideOffset=(guideCenter(toName,brew)-mappedSourceGuide)*0.35;
+  let brewFractions={
+    espresso:-0.04,
+    moka:-0.026,
+    aeropress:-0.013,
+    pourover:0,
+    drip:0.013,
+    frenchpress:0.026,
+    coldbrew:0.04
+  };
+  let brewShift=(brewFractions[brew]||0)*targetRange;
+  let roastFractions={light:-0.025,medium:0,dark:0.025};
+  let roastShift=(roastFractions[roast]||0)*targetRange;
+  let adjusted=mapped+guideOffset+brewShift+roastShift;
+  return {
+    kind:fromName===toName&&roast==="medium"?"same":"guided",
+    value:roundToGrinderStep(toName,adjusted),
+    position,
+    guideOffset,
+    brewShift,
+    roastShift
+  };
 }
 
 function grinderType(name){
@@ -361,160 +485,96 @@ function infoChips(g){
   return items.map(item=>`<span class="fact">${item}</span>`).join("");
 }
 
-function updateGrinderVisuals(){
-  document.getElementById("fromImg").src=grinderImage(fs.value);
-  document.getElementById("fromImg").alt=fs.value;
-  document.getElementById("fromName").textContent=fs.value;
-  document.getElementById("fromMeta").textContent=scaleText(fs.value);
-  document.getElementById("fromInfo").innerHTML=infoChips(fs.value);
-  document.getElementById("toImg").src=grinderImage(ts.value);
-  document.getElementById("toImg").alt=ts.value;
-  document.getElementById("toName").textContent=ts.value;
-  document.getElementById("toMeta").textContent=scaleText(ts.value);
-  document.getElementById("toInfo").innerHTML=infoChips(ts.value);
-}
-
+// Shared calculation data and convertSetting above are preserved from the original tool.
+let grinderMode='start';
+const context=CoffeeContext;
+const field=id=>document.getElementById(id);
+const initialContext=context.get();
+if(initialContext.brew)field('brew').value=initialContext.brew;
+if(initialContext.roast)field('roast').value=['light','medium','dark'].includes(initialContext.roast)?initialContext.roast:'';
+function sourceKind(meta){return meta.community?'Community reference':meta.inferred?'Inferred estimate':meta.official?'Manufacturer reference':'Online reference';}
 function syncSettingInput(){
-  let d=grinders[fs.value];
-  settingInput.min=d.min;
-  settingInput.max=d.max;
-  settingInput.step=d.step;
-  settingInput.value=clamp(parseFloat(settingInput.value)||d.min,d.min,d.max).toFixed(d.step<1?1:0);
-  document.getElementById("settingHelp").innerHTML=`Range: <b>${d.min}-${d.max} ${d.u}</b>. ${d.note}`;
+  const data=grinders[fs.value];settingInput.min=data.min;settingInput.max=data.max;settingInput.step='any';
+  field('settingHelp').textContent=`Range: ${data.min}–${data.max} ${data.u}. Values are rounded to this grinder’s adjustment steps.`;
   calc();
 }
-
-function applyPreset(brew){
-  let d=grinders[fs.value];
-  document.getElementById("brew").value=brew;
-  let guide=getGuide(fs.value,brew);
-  if(guide?.start!==undefined){
-    settingInput.value=guide.start.toFixed(d.step<1?1:0);
-  }
-  calc();
+function updateMode(mode){
+  grinderMode=mode;field('conversion-fields').hidden=mode!=='convert';
+  field('mode-start').setAttribute('aria-pressed',String(mode==='start'));
+  field('mode-convert').setAttribute('aria-pressed',String(mode==='convert'));
+  field('from-label').textContent=mode==='start'?'Your grinder':'From grinder';calc();
 }
-
-function toggleOtherGrinders(){
-  showAllGrinders=!showAllGrinders;
-  calc();
+function guidePresetValue(g,brew){return guideCenter(g,brew);}
+function applyPreset(brew){field('brew').value=brew;context.update({brew});CoffeeCup.choose({brew});calc();}
+function toggleOtherGrinders(){showAllGrinders=!showAllGrinders;renderReferences();}
+function renderReferences(){
+  const brew=field('brew').value;field('tb').replaceChildren();
+  field('toggleMore').hidden=!brew;field('toggleMore').textContent=showAllGrinders?'Hide other grinders':'Show other grinders';
+  if(!brew)return;
+  const priority=[fs.value,ts.value,'Fellow Ode Gen 2','Fellow Opus','KINGrinder K6'];
+  const names=[...new Set([...priority,...Object.keys(grinders)])];
+  names.slice(0,showAllGrinders?names.length:3).forEach(name=>{
+    const meta=guideMeta(name,brew),g=grinders[name],row=document.createElement('tr');
+    const unsupported=name==='Fellow Ode Gen 2'&&brew==='espresso';
+    const source=meta.sourceUrl?`<a href="${meta.sourceUrl}" target="_blank" rel="noopener noreferrer">${meta.source}</a>`:meta.source;
+    row.innerHTML=`<td><img class="thumb" src="${grinderImage(name)}" alt="">${name}</td><td>${unsupported?'Not intended for espresso':meta.guide.display}<span class="guide-origin">${unsupported?'Grinder compatibility note':sourceKind(meta)+' · '+source}</span></td><td>${g.min}–${g.max} ${g.u}</td>`;
+    field('tb').append(row);
+  });
 }
-
 function calc(){
-  let setting=parseFloat(settingInput.value);
-  if(Number.isNaN(setting)) return;
-  let fromData=grinders[fs.value];
-  setting=clamp(setting,fromData.min,fromData.max);
-  let roast=document.getElementById("roast").value;
-  let brew=document.getElementById("brew").value;
-  let profile=brewProfiles[brew];
-  let fromGuide=getGuide(fs.value,brew);
-  let targetGuide=getGuide(ts.value,brew);
-  let sameGrinder=fs.value===ts.value;
-  let targetOfficial=isOfficialGuide(ts.value);
-  let targetShown=sameGrinder?formatValue(ts.value,setting):targetGuide?targetGuide.display:"Use grinder's own guide";
-  let resultBox=document.querySelector(".live-result");
-  resultBox.classList.toggle("estimated-result",!sameGrinder&&Boolean(targetGuide)&&!targetOfficial);
-
-  document.getElementById("micron").textContent=formatValue(fs.value,setting);
-  document.getElementById("targetLine").innerHTML=`${ts.value}: <b>${targetShown}</b>${targetGuide&&!sameGrinder?` <span class="sub">(${grinderGuides[ts.value].source})</span>`:""}`;
-  document.getElementById("toSetting").textContent=targetShown;
-  document.getElementById("toSettingNote").textContent=sameGrinder?"Same grinder setting":targetGuide?(targetOfficial?"Official published starting point":"Caution: internet estimate, not official"):"No cross-grinder reference available";
-  document.getElementById("suggestion").textContent=profile.label;
-  document.getElementById("suggestionText").textContent=`${brewNames[brew]}: ${profile.note} ${roastNotes[roast]}`;
-
-  let statusBox=document.getElementById("status");
-  let statusKind="";
-  let statusText="";
-  let fromOfficial=isOfficialGuide(fs.value);
-  let fromGuideType=fromOfficial?"published":"internet-estimated";
-  if(sameGrinder&&fromGuide?.range){
-    if(setting<fromGuide.range[0]){
-      statusKind="warn";
-      statusText=`Your setting is finer than the ${fromGuideType} ${brewNames[brew]} starting range for ${fs.value}.`;
-    }else if(setting>fromGuide.range[1]){
-      statusKind="warn";
-      statusText=`Your setting is coarser than the ${fromGuideType} ${brewNames[brew]} starting range for ${fs.value}.`;
-    }else{
-      statusText=`Your setting is inside the ${fromGuideType} ${brewNames[brew]} starting range for ${fs.value}.`;
-    }
-  }else if(!sameGrinder&&targetGuide){
-    statusKind=targetOfficial?"":"warn";
-    statusText=`${targetOfficial?"Start":"Caution: start"} at ${guideText(ts.value,brew)} on ${ts.value}, then adjust by taste and brew time.${targetOfficial?"":" This is an internet estimate, not an official setting."}`;
-  }else if(!sameGrinder){
-    statusKind="warn";
-    statusText=`There is no ${brewNames[brew]} starting point for ${ts.value} in this reference set. Check that grinder's own guide.`;
-  }else if(fromGuide){
-    statusText=`Use ${guideText(fs.value,brew)} as a starting point, then adjust by taste.`;
-  }else{
-    statusKind="warn";
-    statusText=`There is no ${brewNames[brew]} starting point for ${fs.value} in this reference set.`;
+  const brew=field('brew').value,roast=field('roast').value,data=grinders[fs.value];
+  field('fromImg').src=grinderImage(fs.value);field('fromImg').alt=fs.value;field('fromMeta').textContent=scaleText(fs.value);
+  field('toImg').src=grinderImage(ts.value);field('toImg').alt=ts.value;field('toMeta').textContent=scaleText(ts.value);
+  const roastContext=context.get().roast,rangeRoast=roastContext?.includes('-');
+  field('roast-context').hidden=!rangeRoast;
+  field('roast-context').textContent=rangeRoast?`Your suggested coffee is ${context.labels.roast[roastContext].toLowerCase()}. Choose the roast level printed on your bag.`:'';
+  const quick=field('quickRanges');quick.innerHTML=Object.entries(brewNames).map(([key,label])=>`<button class="chip" type="button" data-brew="${key}" aria-pressed="${key===brew}">${label}</button>`).join('');
+  field('grinder-facts').innerHTML=`${infoChips(fs.value)}${grinderMode==='convert'?infoChips(ts.value):''}`;
+  field('roast-guidance').textContent=roast?roastNotes[roast]:'Choose a roast level to see taste-aware guidance.';
+  field('conversion-explanation').textContent='Conversions retain the original tool’s scale mapping, guide offset, brew adjustment, and roast adjustment. They cannot account for every grinder calibration.';
+  renderReferences();
+  let error='';
+  if(grinderMode==='convert'){
+    const entered=settingInput.valueAsNumber;
+    if(settingInput.value.trim()===''||!Number.isFinite(entered))error='Enter a current grinder setting to see a fresh conversion.';
+    else if(entered<data.min||entered>data.max)error=`Use a setting between ${data.min} and ${data.max} ${data.u} for this grinder.`;
   }
-  let action=fromGuide?.start!==undefined?` <button class="secondary" onclick="applyPreset('${brew}')">Use ${brewNames[brew]} start</button>`:"";
-  statusBox.className=`status ${statusKind}`;
-  statusBox.innerHTML=`${statusText}${action}`;
-  updateGrinderVisuals();
-
-  let tableBody=document.getElementById("tb");
-  tableBody.innerHTML="";
-  const priority=["Fellow Ode Gen 2","Fellow Opus","KINGrinder K6"];
-  const ordered=[...priority,...Object.keys(grinders).filter(g=>!priority.includes(g))];
-  ordered.forEach((g,index)=>{
-    if(index>=3&&!showAllGrinders) return;
-    let d=grinders[g];
-    let guide=getGuide(g,brew);
-    let shown=guide?`${guide.display}<span class="guide-origin ${isOfficialGuide(g)?"":"estimate"}">${isOfficialGuide(g)?"Official":"Internet estimate"} · ${grinderGuides[g].source}</span>`:"No starting point";
-    tableBody.innerHTML+=`<tr><td><img class="thumb" src="${grinderImage(g)}" alt="">${g}</td><td>${shown}</td><td>${d.min}-${d.max} ${d.u}</td></tr>`;
-  });
-  let toggle=document.getElementById("toggleMore");
-  toggle.textContent=showAllGrinders?"Hide other grinders":"Show other grinders";
-
-  let quick=document.getElementById("quickRanges");
-  quick.innerHTML="";
-  Object.keys(brewNames).forEach(key=>{
-    let item=document.createElement("button");
-    item.type="button";
-    item.className="chip";
-    item.onclick=()=>applyPreset(key);
-    let guide=getGuide(fs.value,key);
-    item.title=guide?`Use the ${fs.value} starting point for ${brewNames[key]}`:`No ${brewNames[key]} starting point for ${fs.value}`;
-    item.innerHTML=`<span class="brew-icon">${brewIcon(key)}</span><span><span class="chip-title">${brewNames[key]}</span><span class="chip-range">${guide?guide.display:"No guide"}</span></span>`;
-    quick.appendChild(item);
-  });
+  settingInput.setAttribute('aria-invalid',String(Boolean(error)));field('setting-error').textContent=error;
+  const box=field('grinder-result');
+  if(error||!brew||!roast){
+    box.innerHTML=`<p class="eyebrow">YOUR NEXT STEP</p><h2>${error?'Check your setting':'Make it your own.'}</h2><p>${error||(!brew?'Choose your brew method to see a starting point.':'Choose the roast level printed on your bag.')}</p>`;return;
+  }
+  if(brew==='espresso'&&(fs.value==='Fellow Ode Gen 2'||(grinderMode==='convert'&&ts.value==='Fellow Ode Gen 2'))){box.innerHTML='<p class="eyebrow">A DIFFERENT PAIRING</p><h2>Choose an espresso grinder.</h2><p>Fellow Ode Gen 2 is not intended for espresso. Choose another grinder or a filter method to see a useful starting point.</p>';return;}
+  const name=grinderMode==='start'?fs.value:ts.value,meta=guideMeta(name,brew),bounds=recommendedBounds(name,brew);
+  let value,description,resultHint='';
+  if(grinderMode==='start'){
+    const qualifier=meta.guide.display.match(/\s*\((.*?)\)\s*$/);
+    value=meta.guide.display.replace(/\s*\(.*?\)\s*$/,'');
+    resultHint=qualifier?qualifier[1]:'';
+    description=`This is the ${sourceKind(meta).toLowerCase()} for ${name} and ${brewNames[brew]}. ${roastNotes[roast]}`;
+  }else{
+    const setting=roundToGrinderStep(fs.value,settingInput.valueAsNumber),conversion=convertSetting(fs.value,ts.value,setting,brew,roast);
+    value=formatValue(name,conversion.value);
+    const outside=bounds&&(conversion.value<bounds[0]-grinders[name].step/2||conversion.value>bounds[1]+grinders[name].step/2);
+    description=`From ${formatValue(fs.value,setting)} on ${fs.value}. ${outside?'Outside':'Within'} the reference range${bounds?': '+formatValue(name,bounds[0])+' to '+formatValue(name,bounds[1]):''}. This is an approximate conversion; brew once and adjust by taste.`;
+  }
+  const source=meta.sourceUrl?`<a href="${meta.sourceUrl}" target="_blank" rel="noopener noreferrer">${meta.source} ↗</a>`:meta.source;
+  const recipeLink=brew==='pourover'?`<a class="button" href="${context.link('recipes.html')}">Explore filter recipes ↗</a>`:`<a class="button" href="${context.link('brewing.html')}${brew==='drip'?'':'#'+brew}">Explore brewing guidance ↗</a>`;
+  box.innerHTML=`<p class="eyebrow">${grinderMode==='start'?'YOUR STARTING POINT':'YOUR APPROXIMATE CONVERSION'}</p><h2>${name}</h2><span id="toSetting" class="result-value">${value}</span><p class="hint">${resultHint}</p><span class="source-badge">${sourceKind(meta)}</span><p class="source-line">${source}</p><p id="toSettingNote">${description}</p><p class="hint">${brewProfiles[brew].label} · ${brewNames[brew]} · ${context.labels.roast[roast]}</p><div class="next-actions">${recipeLink}<a class="button" href="${context.link('dial-in.html')}">Help with the taste ↗</a></div>`;
+ const save=document.createElement('button');save.type='button';save.className='button cup-save';save.textContent='Use for my cup';
+  const snapshot={mode:grinderMode,from:fs.value,to:name,brew,roast,value,kind:sourceKind(meta),source:meta.source,input:grinderMode==='convert'?settingInput.valueAsNumber:null};
+  save.addEventListener('click',()=>CoffeeCup.saveGrind(snapshot));box.append(save);
 }
+field('mode-start').addEventListener('click',()=>updateMode('start'));
+field('mode-convert').addEventListener('click',()=>updateMode('convert'));
+fs.addEventListener('change',syncSettingInput);ts.addEventListener('change',calc);settingInput.addEventListener('input',calc);
+settingInput.addEventListener('blur',()=>{const value=settingInput.valueAsNumber,d=grinders[fs.value];if(Number.isFinite(value)&&value>=d.min&&value<=d.max){settingInput.value=formatNumber(fs.value,value);}});
+for(const id of ['brew','roast'])field(id).addEventListener('change',()=>{context.update({[id]:field(id).value||null});CoffeeCup.choose({[id]:field(id).value||null});calc();});
+field('quickRanges').addEventListener('click',e=>{const button=e.target.closest('[data-brew]');if(button)applyPreset(button.dataset.brew);});
+field('toggleMore').addEventListener('click',toggleOtherGrinders);
+document.addEventListener('coffee-context-clear',()=>{field('brew').value='';field('roast').value='medium';calc();field('brew').focus();});
+const savedGrind=CoffeeCup.get().grind;
+if(savedGrind){fs.value=savedGrind.from;ts.value=savedGrind.to;if(savedGrind.input!==null)settingInput.value=savedGrind.input;updateMode(savedGrind.mode);}
+syncSettingInput();
 
-if(fs&&ts&&settingInput){
-  syncSettingInput();
-}
-
-const filterButtons = document.querySelectorAll(".filter-button");
-const typeButtons = document.querySelectorAll(".type-button");
-const beanCards = document.querySelectorAll(".bean-card");
-let activeTasteFilter = "all";
-let activeTypeFilter = "all";
-
-function applyBeanFilters() {
-  beanCards.forEach((card) => {
-    const tags = card.dataset.tags || "";
-    const type = card.dataset.type || "";
-    const tasteMatch = activeTasteFilter === "all" || tags.includes(activeTasteFilter);
-    const typeMatch = activeTypeFilter === "all" || type === activeTypeFilter;
-
-    card.classList.toggle("is-hidden", !tasteMatch || !typeMatch);
-  });
-}
-
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    activeTasteFilter = button.dataset.filter;
-    filterButtons.forEach((item) => item.classList.toggle("active", item === button));
-    applyBeanFilters();
-  });
-});
-
-typeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    activeTypeFilter = button.dataset.typeFilter;
-    typeButtons.forEach((item) => item.classList.toggle("active", item === button));
-    applyBeanFilters();
-  });
-});
+document.addEventListener('coffee-cup-restored',()=>{const s=CoffeeCup.get();field('brew').value=s.brew||'';field('roast').value=s.roast||'';if(s.grind){fs.value=s.grind.from;ts.value=s.grind.to;settingInput.value=s.grind.input??'';updateMode(s.grind.mode);}syncSettingInput();});

@@ -1,0 +1,56 @@
+/* Illustrated tasting-note explorer; uses the shared paper and pastel palette. */
+.discovery-sidebar{min-width:0;border-left:1px solid var(--line);padding-left:26px}
+.discovery-sidebar .result-panel{padding:25px 0 0;border-left:0;border-top:1px solid var(--line);margin-top:25px}
+.mood-home .discovery-sidebar .result-panel{padding-left:0}
+.flavor-note{cursor:pointer;outline:none;transition:opacity .18s}
+.wheel-segment:is(:hover,:focus-visible) .family-path{stroke:#665778;stroke-width:3.5;filter:brightness(1.03)}
+html[data-theme=dark] .wheel-segment:is(:hover,:focus-visible) .family-path{stroke:#faf7f0}
+.flavor-note path{stroke:var(--paper);stroke-width:2;fill-opacity:.55;transition:fill-opacity .18s,stroke .18s}
+.flavor-note image,.flavor-note text{pointer-events:none}
+.flavor-note text{font:14px var(--sans);fill:#393d31;text-anchor:middle;dominant-baseline:middle}
+.flavor-note:is(.is-preview,:focus-visible,[aria-pressed=true]) path{fill-opacity:1;stroke:#665778;stroke-width:3.5}
+.has-note-preview .flavor-note:not(.is-preview){opacity:.38}
+html[data-theme=dark] .flavor-note:is(.is-preview,:focus-visible,[aria-pressed=true]) path{stroke:#faf7f0}
+.flavor-detail{padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;min-height:370px;scroll-margin-top:20px}
+.flavor-detail-top{display:flex;align-items:start;justify-content:space-between;gap:10px}
+.flavor-detail .eyebrow{font-size:10px;letter-spacing:1.2px;margin-bottom:16px}
+.flavor-preview-label{font-size:10px;background:var(--tint);border-radius:20px;padding:3px 9px;color:var(--accent-text)}
+.flavor-detail-body{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center}
+.flavor-picture{background:radial-gradient(ellipse,color-mix(in srgb,var(--note-wash),transparent 65%),transparent 72%);border-radius:50%}
+.flavor-picture img{display:block;width:100%;height:auto}
+.flavor-detail h3{font-size:30px;line-height:1.15;margin:0 0 8px}
+.flavor-character{font-size:11px;color:var(--accent-text);margin-bottom:10px}
+.flavor-description{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:0}
+.flavor-reading-tip{font-size:12px;color:var(--muted);padding-top:16px;margin:16px 0;border-top:1px solid var(--line)}
+.flavor-detail-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
+.flavor-detail-actions .button{font-size:12px;padding:9px 13px}
+.flavor-detail-actions .text-link{font-size:12px}
+.flavor-footnote{font-size:10px;color:var(--muted);margin:13px 0 0}
+.family-picture-row{display:flex;justify-content:center;gap:5px;margin-bottom:15px}
+.family-picture-row img{width:28%;max-width:85px}
+.flavor-detail>.button{margin-top:18px}
+.flavor-reveal{animation:flavor-fade .22s ease-out both}
+@keyframes flavor-fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.flavor-browser{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.flavor-browse-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.flavor-browse-heading h4{font:21px var(--serif);margin:0}
+#flavor-count{font-size:11px;color:var(--muted);white-space:nowrap}
+.flavor-search-row{display:flex;gap:8px;align-items:end;margin-bottom:13px}
+.flavor-search-row label{flex:1;min-width:0;font-size:11px;margin:0;color:var(--muted)}
+.flavor-search-row input{width:100%;display:block;margin-top:5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);font-size:14px;min-height:44px}
+.flavor-search-row button{padding:10px;font-size:11px;white-space:nowrap}
+.flavor-gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;max-height:260px;overflow-y:auto;padding:5px 5px 8px;scrollbar-width:thin;scrollbar-color:var(--sage) transparent;overscroll-behavior:contain}
+.flavor-tile{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 3px 8px;border:1px solid var(--line);border-radius:12px;background:var(--paper);transition:background .18s,border-color .18s,transform .18s}
+.flavor-tile img{width:56px;height:56px;transition:transform .18s}
+.flavor-tile span{font-size:11px;line-height:1.3;min-height:28px;display:flex;align-items:center;text-align:center;overflow-wrap:anywhere}
+.flavor-tile:is(.is-preview,:focus-visible){background:var(--rose);border-color:var(--sage)}
+.flavor-tile:is(.is-preview,:focus-visible) img{transform:scale(1.09) rotate(-3deg)}
+.flavor-tile[aria-pressed=true]{background:var(--tint);border:2px solid var(--sage);padding:5px 2px 7px}
+.flavor-gallery-hint{font-size:11px;color:var(--muted);margin:8px 5px 0}
+#flavor-empty{font-size:13px;color:var(--muted);padding:15px}
+#flavor-empty button{border:0;background:none;color:var(--accent-text);text-decoration:underline}
+@media(max-width:1000px){.flavor-detail-body{grid-template-columns:90px 1fr;gap:10px}.flavor-detail{padding:18px}.flavor-detail h3{font-size:26px}.flavor-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.discovery-sidebar{padding-left:18px}}
+@media(max-width:760px) and (min-width:641px){.mood-home .discovery{grid-template-columns:1fr}.discovery-sidebar{border-left:0;padding-left:0}.flavor-gallery{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:640px){.discovery-sidebar{border:0;padding-left:0}.flavor-detail{min-height:0;padding:18px}.flavor-detail-body{grid-template-columns:95px 1fr}.flavor-gallery{grid-template-columns:repeat(3,minmax(0,1fr));max-height:230px}.flavor-search-row input{font-size:16px}.flavor-search-row{flex-wrap:wrap}.flavor-search-row label{flex-basis:190px}.flavor-browse-heading h4{font-size:19px}.flavor-tile span{font-size:12px}.flavor-detail h3{font-size:27px}.flavor-detail-actions{gap:5px}.discovery-sidebar .result-panel{margin-top:22px}}
+@media(max-width:380px){.flavor-note text{display:none}.flavor-detail-body{grid-template-columns:76px 1fr}.flavor-detail h3{font-size:24px}.flavor-description{font-size:13px}.flavor-browse-heading{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.flavor-reveal{animation:none}.flavor-tile:is(.is-preview,:focus-visible) img{transform:none}}
