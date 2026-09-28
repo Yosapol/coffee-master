@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Roasted coffee bean varieties</title>
+  <desc id="desc">Four groups of roasted coffee beans on a warm tabletop.</desc>
+  <defs>
+    <linearGradient id="table" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f5e8d2"/>
+      <stop offset="0.5" stop-color="#d4b98f"/>
+      <stop offset="1" stop-color="#8f6645"/>
+    </linearGradient>
+    <radialGradient id="beanLight" cx="35%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#c78454"/>
+      <stop offset="0.55" stop-color="#724026"/>
+      <stop offset="1" stop-color="#2c140d"/>
+    </radialGradient>
+    <radialGradient id="beanMedium" cx="35%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#a9613a"/>
+      <stop offset="0.6" stop-color="#542817"/>
+      <stop offset="1" stop-color="#1c0d08"/>
+    </radialGradient>
+    <radialGradient id="beanGold" cx="35%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#d3955e"/>
+      <stop offset="0.55" stop-color="#805035"/>
+      <stop offset="1" stop-color="#32170e"/>
+    </radialGradient>
+    <radialGradient id="beanDark" cx="35%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#71412b"/>
+      <stop offset="0.62" stop-color="#29130e"/>
+      <stop offset="1" stop-color="#0e0705"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#3b1c10" flood-opacity="0.25"/>
+    </filter>
+    <g id="bean">
+      <ellipse cx="0" cy="0" rx="42" ry="68"/>
+      <path d="M4 -57 C-17 -35 14 -17 -10 8 C-24 24 -8 46 -2 58" fill="none" stroke="#f4d1a9" stroke-width="7" stroke-linecap="round" opacity="0.42"/>
+    </g>
+  </defs>
+  <rect width="1200" height="900" fill="url(#table)"/>
+  <path d="M0 250 C240 185 365 310 575 235 C780 160 938 180 1200 105 L1200 0 L0 0 Z" fill="#6f8062" opacity="0.18"/>
+  <path d="M0 750 C275 680 438 790 650 706 C865 622 993 696 1200 626 L1200 900 L0 900 Z" fill="#4b2718" opacity="0.14"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(285 225)">
+      <use href="#bean" fill="url(#beanLight)" transform="translate(-108 -36) rotate(-31)"/>
+      <use href="#bean" fill="url(#beanLight)" transform="translate(-34 -75) rotate(18) scale(.88)"/>
+      <use href="#bean" fill="url(#beanLight)" transform="translate(55 -40) rotate(-5) scale(1.04)"/>
+      <use href="#bean" fill="url(#beanLight)" transform="translate(-83 55) rotate(35) scale(.95)"/>
+      <use href="#bean" fill="url(#beanLight)" transform="translate(20 65) rotate(-22) scale(1.1)"/>
+      <use href="#bean" fill="url(#beanLight)" transform="translate(116 45) rotate(27) scale(.82)"/>
+    </g>
+    <g transform="translate(900 245)">
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(-110 -48) rotate(22) scale(.95)"/>
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(-20 -68) rotate(-17)"/>
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(82 -22) rotate(34) scale(.9)"/>
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(-75 55) rotate(-38) scale(1.04)"/>
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(32 58) rotate(8) scale(.96)"/>
+      <use href="#bean" fill="url(#beanMedium)" transform="translate(132 63) rotate(-20) scale(.84)"/>
+    </g>
+    <g transform="translate(290 655)">
+      <use href="#bean" fill="url(#beanGold)" transform="translate(-116 -35) rotate(14) scale(.86)"/>
+      <use href="#bean" fill="url(#beanGold)" transform="translate(-28 -70) rotate(-27) scale(1.02)"/>
+      <use href="#bean" fill="url(#beanGold)" transform="translate(71 -42) rotate(20)"/>
+      <use href="#bean" fill="url(#beanGold)" transform="translate(-91 52) rotate(-10) scale(1.08)"/>
+      <use href="#bean" fill="url(#beanGold)" transform="translate(18 70) rotate(38) scale(.93)"/>
+      <use href="#bean" fill="url(#beanGold)" transform="translate(126 32) rotate(-34) scale(.86)"/>
+    </g>
+    <g transform="translate(885 654)">
+      <use href="#bean" fill="url(#beanDark)" transform="translate(-122 -26) rotate(-19)"/>
+      <use href="#bean" fill="url(#beanDark)" transform="translate(-28 -74) rotate(27) scale(.92)"/>
+      <use href="#bean" fill="url(#beanDark)" transform="translate(82 -42) rotate(-7) scale(1.06)"/>
+      <use href="#bean" fill="url(#beanDark)" transform="translate(-80 68) rotate(35) scale(.9)"/>
+      <use href="#bean" fill="url(#beanDark)" transform="translate(16 62) rotate(-31) scale(1.02)"/>
+      <use href="#bean" fill="url(#beanDark)" transform="translate(118 56) rotate(19) scale(.83)"/>
+    </g>
+  </g>
+</svg>

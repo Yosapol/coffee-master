@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm');
+const read=f=>fs.readFileSync(f,'utf8');
+const mood=read('mood.js');
+const families=vm.runInNewContext(mood.slice(mood.indexOf('const families ='),mood.indexOf('  let mood ='))+';({families,moods})');
+const brewers=vm.runInNewContext(read('recipes.js').split('const specLabels')[0]+';brewers');
+const grinders=vm.runInNewContext(read('script.js').split('const brewNames')[0]+';grinders');
+const strip=s=>s.replace(/<[^>]+>/g,'').trim();
+const beans=[...read('beans.html').matchAll(/<article class="bean-card" id="([^"]+)"[\s\S]*?<\/article>/g)].map(m=>({id:m[1],name:strip(m[0].match(/<h2[^>]*>(.*?)<\/h2>/s)[1]),roast:strip(m[0].match(/class="bean-meta">\s*<span>(.*?)<\/span>/s)[1])}));
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const noteContext={window:{}};vm.runInNewContext(read('flavor-notes.js'),noteContext);
+const data={notes:Object.fromEntries(noteContext.window.CoffeeFlavors.map(n=>[n.id,{name:n.name,family:n.family}])),moods:Object.fromEntries(families.moods.map(m=>[m.id,m.name])),beans:Object.fromEntries(beans.map(b=>[b.id,b])),recommendations:Object.fromEntries(families.families.flatMap(f=>f.beans.map((b,i)=>[f.id+'-'+i,{...b,family:f.id,index:i}]))),recipes:Object.fromEntries(brewers.flatMap((b,bi)=>b.recipes.map((r,ri)=>[r.id||slug(b.name+' '+r.name),{name:r.name,author:b.name,brewer:bi,recipe:ri,brew:'pourover',specs:r.specs,steps:r.steps,source:r.source,specLabels:r.specLabels,stepSources:r.stepSources,note:r.note}]))),grinders:Object.fromEntries(Object.entries(grinders).map(([k,v])=>[k,{min:v.min,max:v.max}]))};
+fs.writeFileSync('cup-data.js','/* Stable, allowlisted journey references. Regenerate with scripts/build-cup-data.cjs. */\nwindow.CupData='+JSON.stringify(data,null,2)+';\n');

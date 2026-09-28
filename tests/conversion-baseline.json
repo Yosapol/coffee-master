@@ -1,0 +1,87 @@
+[
+  {
+    "args": [
+      "Fellow Ode Gen 2",
+      "Fellow Opus",
+      5.33,
+      "pourover",
+      "medium"
+    ],
+    "result": {
+      "kind": "guided",
+      "value": 6.25,
+      "position": 0.433,
+      "guideOffset": 0.9624999999999999,
+      "brewShift": 0,
+      "roastShift": 0
+    }
+  },
+  {
+    "args": [
+      "KINGrinder K6",
+      "Comandante C40 MK4",
+      90,
+      "pourover",
+      "light"
+    ],
+    "result": {
+      "kind": "guided",
+      "value": 22,
+      "position": 0.375,
+      "guideOffset": 0.8312499999999999,
+      "brewShift": 0,
+      "roastShift": -1.5
+    }
+  },
+  {
+    "args": [
+      "Fellow Opus",
+      "Baratza Encore ESP",
+      2,
+      "espresso",
+      "dark"
+    ],
+    "result": {
+      "kind": "guided",
+      "value": 6,
+      "position": 0.1,
+      "guideOffset": 1.7893749999999997,
+      "brewShift": -1.56,
+      "roastShift": 0.9750000000000001
+    }
+  },
+  {
+    "args": [
+      "Baratza Encore",
+      "Fellow Ode Gen 2",
+      20,
+      "frenchpress",
+      "medium"
+    ],
+    "result": {
+      "kind": "guided",
+      "value": 6,
+      "position": 0.48717948717948717,
+      "guideOffset": 0.022435897435897356,
+      "brewShift": 0.26,
+      "roastShift": 0
+    }
+  },
+  {
+    "args": [
+      "Fellow Ode Gen 2",
+      "Fellow Ode Gen 2",
+      7,
+      "drip",
+      "medium"
+    ],
+    "result": {
+      "kind": "same",
+      "value": 7,
+      "position": 0.6,
+      "guideOffset": 0,
+      "brewShift": 0.13,
+      "roastShift": 0
+    }
+  }
+]

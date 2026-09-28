@@ -1,0 +1,40 @@
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+const base=((process.env.COFFEE_BASE_URL||'http://127.0.0.1:4173/')+'');
+(async()=>{const b=await chromium.launch();try{
+ const p=await b.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});await p.addInitScript(()=>window.WebSocket=class{});
+ const errors=[];p.on('pageerror',e=>errors.push(e.message));const state=()=>p.evaluate(()=>CoffeeCup.get());
+ await p.goto(base);assert.deepEqual(await state(),{version:1});
+ await p.locator('#cup-open').click();assert(await p.getByText('A little space for your next cup.').isVisible());await p.keyboard.press('Escape');assert(await p.locator('#cup-open').evaluate(e=>e===document.activeElement));
+ await p.locator('[data-mood="cozy"]').click();assert.equal((await state()).mood,'cozy');
+ await p.locator('.flavor-note').first().hover();assert.equal((await state()).note,undefined);
+ await p.locator('#coffee-result .cup-save').click();assert.equal((await state()).bean.kind,'recommendations');assert.equal((await state()).roast,'medium');
+ await p.goto(base+'beans.html');await p.locator('#brazilian-bourbon .cup-save').click();assert.equal((await state()).bean.id,'brazilian-bourbon');
+ const flavor=(await state()).flavor;await p.locator('[data-flavor="floral"]').click();assert.equal((await state()).flavor,flavor);
+ await p.goto(base+'brewing.html');await p.locator('#pourover').getByRole('button',{name:'Use this method'}).click();assert.equal((await state()).brew,'pourover');
+ await p.goto(base+'grinder.html');assert.equal(await p.locator('#brew').inputValue(),'pourover');
+ await p.locator('#roast').selectOption('light');await p.locator('#grinder-result .cup-save').click();assert((await state()).grind);const grind=(await state()).grind;
+ await p.goto(base+'recipes.html');assert.equal((await state()).recipe,undefined);
+ await p.locator('.recipe-choice').nth(1).click();assert.equal((await state()).recipe,undefined);await p.locator('.recipe-detail .cup-save').click();assert((await state()).recipe);const recipe=(await state()).recipe;
+ await p.reload();assert.equal((await state()).recipe,recipe);assert.equal(await p.locator('.recipe-choice[aria-pressed="true"]').getAttribute('data-recipe'),'1');
+ await p.goto(base+'grinder.html?brew=espresso&roast=dark');assert.equal((await state()).brew,'pourover');assert(await p.locator('#journey-context').isVisible());
+ await p.locator('#roast').selectOption('medium');assert.equal((await state()).grind,undefined);
+ await p.locator('#brew').selectOption('moka');assert.equal((await state()).recipe,undefined);
+ await p.locator('#cup-open').click();assert.match(await p.locator('.cup-body').innerText(),/method changed|brew choices changed/);
+ const before=await state();await p.getByRole('button',{name:'Start fresh',exact:true}).click();assert.deepEqual(await state(),{version:1});assert(!p.url().includes('brew='));
+ await p.getByRole('button',{name:'Undo start fresh'}).click();assert.deepEqual(await state(),before);await p.keyboard.press('Escape');
+ await p.goto(base+'grinder.html');await p.locator('#mode-convert').click();await p.locator('#s').fill('999999');assert.equal(await p.locator('#grinder-result .cup-save').count(),0);
+ await p.goto(base+'index.html');await p.locator('[data-mood="curious"]').click();await p.locator('#coffee-result .cup-save').click();assert.equal((await state()).roast,'medium','Range does not overwrite chosen roast');
+ for(const theme of ['light','dark'])for(const width of [320,390,768,1440])for(const page of ['index','beans','brewing','water','equipment','thai-coffee','knowledge','grinder','recipes','dial-in']){
+  await p.setViewportSize({width,height:900});await p.goto(base+page+'.html');await p.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  await p.locator('#cup-open').click();assert(await p.locator('#cup-dialog').isVisible());
+  assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${page} ${width}`);
+  const r=await p.locator('#cup-dialog').boundingBox();assert(r.x>=0&&r.x+r.width<=width+1&&r.y>=0&&r.y+r.height<=901);
+  await p.keyboard.press('Escape');
+ }
+ await p.setViewportSize({width:390,height:900});await p.goto(base);await p.locator('#cup-open').click();await p.screenshot({path:'tests/screenshots/cup-mobile.png'});
+ await p.keyboard.press('Escape');await p.setViewportSize({width:1440,height:1000});await p.locator('#cup-open').click();await p.screenshot({path:'tests/screenshots/cup-desktop.png'});
+ assert.deepEqual(errors,[]);
+ const q=await b.newPage();await q.addInitScript(()=>{localStorage.setItem('coffee-master-cup-v1','{"version":1,"mood":"oops","flavor":"__proto__","recipe":"fake","bean":{"kind":"beans","id":"fake"}}');});await q.goto(base);assert.deepEqual(await q.evaluate(()=>CoffeeCup.get()),{version:1});await q.close();
+ const blocked=await b.newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw Error('blocked')}})});await blocked.goto(base);await blocked.locator('[data-mood="cozy"]').click();assert.equal(await blocked.evaluate(()=>CoffeeCup.get().mood),'cozy');await blocked.close();
+ console.log('PASS: complete cup journey, saves vs browsing, persistence, context conflicts, invalidation, reset/undo, invalid input, 80 layouts/themes, keyboard, corrupt/blocked storage and no runtime errors');
+}finally{await b.close();}})().catch(e=>{console.error(e);process.exit(1)});
